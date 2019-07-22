@@ -7,6 +7,9 @@ import SignUp from './auth/components/SignUp'
 import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
+import CreateReview from './reviews/components/CreateReview'
+import Review from './reviews/components/Review'
+import ReviewsList from './reviews/components/ReviewsList'
 
 import { SnackbarProvider } from 'notistack'
 
@@ -36,6 +39,15 @@ class App extends Component {
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn alert={this.alert} setUser={this.setUser} />
+          )} />
+          <AuthenticatedRoute user={user} path='/create-review' render={() => (
+            <CreateReview alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/reviews' render={() => (
+            <ReviewsList alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/reviews/:id' render={() => (
+            <Review alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
