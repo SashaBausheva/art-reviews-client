@@ -59,7 +59,6 @@ class SignIn extends Component {
 
                 <TextField
                   required
-                  id="outlined-with-placeholder"
                   type="email"
                   name="email"
                   value={email}
@@ -71,7 +70,6 @@ class SignIn extends Component {
                 />
                 <TextField
                   required
-                  id="outlined-with-placeholder"
                   type="password"
                   name="password"
                   value={password}
