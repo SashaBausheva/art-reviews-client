@@ -1,7 +1,7 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const showReviews = user => {
+export const indexReviews = user => {
   return axios({
     url: apiUrl + '/reviews',
     method: 'GET',
@@ -49,6 +49,6 @@ export const editReview = (user, id, review) => {
     headers: {
       'Authorization': `Token token=${user.token}`
     },
-    data: { review }
+    data: { review: review }
   })
 }

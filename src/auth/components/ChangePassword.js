@@ -9,6 +9,12 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
 const styles = {
+  editBtn: {
+    margin: '.4rem'
+  },
+  label: {
+    margin: '.2rem'
+  },
   paper: {
     maxWidth: '600px',
     padding: '2rem',
@@ -56,7 +62,6 @@ class ChangePassword extends Component {
               <form className='auth-form' onSubmit={this.onChangePassword}>
                 <h3>Change Password</h3>
 
-                <label htmlFor="oldpw">Old Password</label>
                 <TextField
                   required
                   name="oldPassword"
@@ -68,7 +73,6 @@ class ChangePassword extends Component {
                   style={{ width: '100%', marginBotton: '1rem' }}
                   onChange={this.handleChange}
                 />
-                <label htmlFor="newPassword">New Password</label>
                 <TextField
                   required
                   name="newPassword"
@@ -80,7 +84,7 @@ class ChangePassword extends Component {
                   style={{ width: '100%', marginBotton: '1rem' }}
                   onChange={this.handleChange}
                 />
-                <Button type='submit' variant="contained" color="primary">Change Password</Button>
+                <Button type='submit' style={{ marginTop: '1rem' }} variant="contained" color="primary">Change Password</Button>
               </form>
             </Paper>
           </Grid>
