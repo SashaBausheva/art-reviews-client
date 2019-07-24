@@ -48,7 +48,7 @@ class Reviews extends Component {
       }
       )
       .catch(() => {
-        snackBar(messages.showReviewsFailure, 'warning')
+        snackBar(messages.showReviewsFailure, { variant: 'warning' })
       })
   }
 

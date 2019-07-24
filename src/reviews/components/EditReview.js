@@ -41,7 +41,7 @@ class EditReview extends Component {
     showReview(user, id)
       .then(response => this.setState({ review: response.data.review }))
       .catch(() => {
-        snackBar(messages.showReviewFailure, 'warning')
+        snackBar(messages.showReviewFailure, { variant: 'warning' })
       })
   }
 

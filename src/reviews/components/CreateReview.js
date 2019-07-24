@@ -55,12 +55,12 @@ class CreateReview extends Component {
           created: true,
           review: response.data.review
         }))
-        .then(() => enqueueSnackbar(messages.createReviewSuccess, 'success'))
+        .then(() => enqueueSnackbar(messages.createReviewSuccess, { variant: 'success' }))
         .catch(() => {
           this.setState({
             review: { ...review, artistUsername: '', profileUrl: '', artistSpecialty: '', rating: '' }
           })
-          enqueueSnackbar(messages.createReviewFailure, 'error')
+          enqueueSnackbar(messages.createReviewFailure, { variant: 'error' })
         }
         )
     }

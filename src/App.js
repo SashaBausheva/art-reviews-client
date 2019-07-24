@@ -12,6 +12,7 @@ import Review from './reviews/components/Review'
 import ReviewsList from './reviews/components/ReviewsList'
 import EditReview from './reviews/components/EditReview'
 import Home from './Home.js'
+import SearchImages from './reviews/components/SearchImages'
 
 import { SnackbarProvider } from 'notistack'
 
@@ -47,6 +48,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/create-review' render={() => (
             <CreateReview alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/image-search' render={() => (
+            <SearchImages alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/reviews' render={() => (
             <ReviewsList alert={this.alert} user={user} />

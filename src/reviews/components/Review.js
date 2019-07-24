@@ -38,7 +38,7 @@ class Review extends Component {
     showReview(user, id)
       .then(response => this.setState({ review: response.data.review }))
       .catch(() => {
-        enqueueSnackbar(messages.showReviewFailure, 'success')
+        enqueueSnackbar(messages.showReviewFailure, { variant: 'success' })
       })
   }
 
@@ -48,9 +48,9 @@ class Review extends Component {
     const id = this.props.match.params.id
     deleteReview(user, id)
       .then(() => this.setState({ deleted: true }))
-      .then(() => enqueueSnackbar(messages.deleteReviewSuccess, 'success'))
+      .then(() => enqueueSnackbar(messages.deleteReviewSuccess, { variant: 'success' }))
       .catch(() => {
-        enqueueSnackbar(messages.deleteReviewFailure, 'error')
+        enqueueSnackbar(messages.deleteReviewFailure, { variant: 'error' })
       })
   }
 

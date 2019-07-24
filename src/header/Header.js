@@ -56,7 +56,7 @@ class Header extends Component {
       <div style={styles.list}>
         <div className="side-nav-title">
           <Typography variant="h6" style={styles.title}>
-            Uber, but for Taxis
+            Uber, but for goddamn Taxis
           </Typography>
         </div>
         <Divider />
@@ -71,19 +71,25 @@ class Header extends Component {
             <ListItemIcon>
               <RateReview />
             </ListItemIcon>
-            <ListItemText primary="My Reviews" />
+            <ListItemText primary="My Collection" />
+          </ListItem>
+          <ListItem button component={Link} to="/image-search">
+            <ListItemIcon>
+              <RateReview />
+            </ListItemIcon>
+            <ListItemText primary="Search Images" />
           </ListItem>
           {/* <ListItem button component={Link} to="/LINK">
             <ListItemIcon>
               And another option
             </ListItemIcon>
-            <ListItemText primary="Search Beers" />
+            <ListItemText primary="" />
           </ListItem>
-          <ListItem button component={Link} to="/yelp-search">
+          <ListItem button component={Link} to="">
             <ListItemIcon>
               One more option
             </ListItemIcon>
-            <ListItemText primary="Find Breweries" />
+            <ListItemText primary="" />
           </ListItem> */}
         </List>
         <Divider />
