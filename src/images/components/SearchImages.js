@@ -163,6 +163,8 @@ class SearchImages extends Component {
               <ImagesResults key={image.id}
                 name={image.alt_description}
                 imageUrl={image.urls.regular}
+                fullUrl={image.urls.full}
+                userUrl={image.user.links.html}
                 altDescription={image.alt_description}
                 userName={image.user.name}
                 id={image.id}

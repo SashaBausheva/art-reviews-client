@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter, Link } from 'react-router-dom'
+import { withSnackbar } from 'notistack'
 
-import { indexImageEntries } from '../api'
+import { indexImageEntries, deleteImageEntry } from '../api'
 import messages from '../messages'
 
 import LinearProgress from '@material-ui/core/LinearProgress'
@@ -10,15 +11,31 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Grid from '@material-ui/core/Grid'
+import Card from '@material-ui/core/Card'
+import CardActionArea from '@material-ui/core/CardActionArea'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import Typography from '@material-ui/core/Typography'
 
 const styles = {
+  card: {
+    maxWidth: '50%'
+  },
+  div: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   editBtn: {
     margin: '.2rem'
   },
+  media: {
+    height: 300
+  },
   paper: {
-    maxWidth: '600px',
+    maxWidth: '800px',
     padding: '2rem',
-    margin: '.4rem auto'
+    margin: '2rem auto'
   }
 }
 
@@ -27,7 +44,8 @@ class ImageEntries extends Component {
     super()
 
     this.state = {
-      images: []
+      images: [],
+      deleted: false
     }
   }
 
@@ -50,6 +68,18 @@ class ImageEntries extends Component {
       .catch(() => {
         snackBar(messages.showImageEntriesFailure, { variant: 'warning' })
       })
+  }
+
+  handleDelete = (event) => {
+    event.preventDefault()
+    const { user, enqueueSnackbar } = this.props
+    const id = event.currentTarget.value
+    console.log(event)
+    deleteImageEntry(user, id)
+      .then(() => this.setState({ deleted: true }))
+      .then(() => enqueueSnackbar(messages.deleteImageEntrySuccess, { variant: 'success' }))
+      .catch(() => enqueueSnackbar(messages.deleteImageEntryFailure, { variant: 'error' })
+      )
   }
 
   render () {
@@ -111,20 +141,42 @@ class ImageEntries extends Component {
           </Grid>
         </div>
         <div>
-          {images.map(image => (
+          {this.state.images.map(image => (
             <Grid container key={image._id} spacing={3}>
               <Grid item xs={12}>
-                <Paper style={ styles.paper }>
-                  <div className="image-content" id={image._id}>
-                    <h2>Artist: {image.artistUsername}</h2>
-                    <h3><a href={image.profileUrl}>Profile</a></h3>
-                    <p>Artist Specialty: {image.artistSpecialty}</p>
-                    <p>You rated them as: {image.rating}</p>
-                    <Button component={Link} to={'/images/' + image._id} variant="contained" color="primary">
-                View
+                <Card style={styles.card}>
+                  <CardActionArea>
+                    <CardMedia
+                      style={styles.media}
+                      image={image.imageUrl}
+                      title={image.altDescription}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {image.altDescription}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        By <a href={image.userUrl}>{image.userName}</a> on Unsplash
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        Notes: {image.comments}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <a href={image.fullUrl} target="_blank" rel="noopener noreferrer">
+                      <Button size="small" color="primary">
+                        Full Size
+                      </Button>
+                    </a>
+                    <Button component={Link} to={'/images/' + image._id} size="small" color="primary">
+                      View Info
                     </Button>
-                  </div>
-                </Paper>
+                    <Button onClick={this.handleDelete} value={image._id}>
+                      Delete
+                    </Button>
+                  </CardActions>
+                </Card>
               </Grid>
             </Grid>
           ))}
@@ -134,4 +186,4 @@ class ImageEntries extends Component {
   }
 }
 
-export default withRouter(ImageEntries)
+export default withSnackbar(withRouter(ImageEntries))

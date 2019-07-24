@@ -12,11 +12,21 @@ import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 
 const styles = {
+  card: {
+    maxWidth: '50%'
+  },
+  div: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   editBtn: {
     margin: '.4rem'
   },
+  media: {
+    height: 300
+  },
   paper: {
-    maxWidth: '600px',
+    maxWidth: '800px',
     padding: '2rem',
     margin: '2rem auto'
   }

@@ -30,7 +30,7 @@ const styles = {
   }
 }
 
-const ImagesResults = ({ id, imageUrl, altDescription, userName, comments }) => (
+const ImagesResults = ({ id, imageUrl, fullUrl, userUrl, altDescription, userName, comments }) => (
   <div className='image-card'>
     <Card style={styles.card}>
       <CardActionArea>
@@ -44,25 +44,29 @@ const ImagesResults = ({ id, imageUrl, altDescription, userName, comments }) => 
             {altDescription}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-           By {userName} on Unsplash
-           img id: {id}
+           By <a href="LINK HERE">{userName}</a> on Unsplash
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button fullWidth component={Link} to={{
+        <a href={fullUrl} target="_blank" rel="noopener noreferrer">
+          <Button size="small" color="primary">
+            Full Size
+          </Button>
+        </a>
+        <Button size="small" color="primary" component={Link} to={{
           pathname: '/create-image-entry-from-search',
           searchResults: {
             imageUrlPlaceholder: imageUrl,
+            fullUrl: fullUrl,
+            userUrl: userUrl,
             altDescriptionPlaceholder: altDescription,
             userNamePlaceholder: userName,
-            comments: ''
+            comments: '',
+            id: id
           }
-        }} variant="contained" color="primary">
-      Create New Image Entry
+        }}>
+      Add to Collection
         </Button>
       </CardActions>
     </Card>

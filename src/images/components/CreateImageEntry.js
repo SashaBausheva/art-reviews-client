@@ -31,6 +31,8 @@ class CreateImageEntry extends Component {
     this.state = {
       image: {
         imageUrl: '',
+        fullUrl: '',
+        userUrl: '',
         altDescription: '',
         userName: '',
         comments: ''
@@ -58,7 +60,7 @@ class CreateImageEntry extends Component {
         .then(() => enqueueSnackbar(messages.createImageEntrySuccess, { variant: 'success' }))
         .catch(() => {
           this.setState({
-            image: { ...image, imageUrl: '', altDescription: '', userName: '', comments: '' }
+            image: { ...image, imageUrl: '', fullUrl: '', userUrl: '', altDescription: '', userName: '', comments: '' }
           })
           enqueueSnackbar(messages.createImageEntryFailure, { variant: 'error' })
         }
@@ -74,7 +76,7 @@ class CreateImageEntry extends Component {
         }} />
       }
 
-      const { imageUrl, altDescription, userName, comments } = image
+      const { imageUrl, fullUrl, userUrl, altDescription, userName, comments } = image
       return (
         <Fragment>
           <Grid container spacing={3}>
@@ -82,6 +84,8 @@ class CreateImageEntry extends Component {
               <Paper style={ styles.paper }>
                 <ImageEntryForm
                   imageUrl={imageUrl}
+                  fullUrl={fullUrl}
+                  userUrl={userUrl}
                   altDescription={altDescription}
                   userName={userName}
                   comments={comments}

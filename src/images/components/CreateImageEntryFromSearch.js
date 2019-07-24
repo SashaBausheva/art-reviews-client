@@ -15,7 +15,8 @@ class CreateImageEntryFromSearch extends Component {
         imageUrl: '',
         altDescription: '',
         userName: '',
-        comments: ''
+        comments: '',
+        id: ''
       },
       created: false,
       message: null
@@ -23,14 +24,17 @@ class CreateImageEntryFromSearch extends Component {
   }
 
   componentDidMount () {
-    const { imageUrlPlaceholder, altDescriptionPlaceholder, userNamePlaceholder } = this.props.location.searchResults
+    const { imageUrlPlaceholder, altDescriptionPlaceholder, userNamePlaceholder, id, fullUrl, userUrl } = this.props.location.searchResults
 
     this.setState({
       image: {
         imageUrl: imageUrlPlaceholder,
+        fullUrl: fullUrl,
+        userUrl: userUrl,
         altDescription: altDescriptionPlaceholder,
         userName: userNamePlaceholder,
-        comments: ''
+        comments: '',
+        id: id
       }
     })
   }
@@ -43,19 +47,21 @@ class CreateImageEntryFromSearch extends Component {
 
     handleSubmit = (event) => {
       event.preventDefault()
-      const { user, snackBar } = this.props
+      const { user, enqueueSnackbar } = this.props
       const { image } = this.state
+      // console.log('on handlesumbit image is ', image)
       createImageEntry(user, image)
         .then(response => this.setState({
           created: true,
           image: response.data.image
         }))
-        .then(() => snackBar(messages.createImageEntrySuccess, 'success'))
+        .then(() => console.log('after created image is', this.state.image))
+        .then(() => enqueueSnackbar(messages.createImageEntrySuccess, { variant: 'success' }))
         .catch(() => {
           this.setState({
-            image: { ...image, imageUrl: '', altDescription: '', userName: '', comments: '' }
+            image: { ...image, imageUrl: '', fullUrl: '', userUrl: '', altDescription: '', userName: '', comments: '', id: '' }
           })
-          snackBar(messages.createImageEntryFailure, 'error')
+          enqueueSnackbar(messages.createImageEntryFailure, { variant: 'error' })
         }
         )
     }
@@ -69,18 +75,22 @@ class CreateImageEntryFromSearch extends Component {
         }} />
       }
 
-      const { imageUrlPlaceholder, altDescriptionPlaceholder, userNamePlaceholder } = this.props.location.searchResults
+      const { imageUrlPlaceholder, altDescriptionPlaceholder, userNamePlaceholder, id, userUrl, fullUrl } = this.props.location.searchResults
       const { imageUrl, altDescription, userName, comments } = image
+      console.log('this is image fullUrl is ', image.fullUrl)
       return (
         <Fragment>
           <SearchedImageEntryForm
             imageUrl={imageUrl}
-            altDescription={altDescription}
+            fullUrl={fullUrl}
+            altDescription={ altDescription || '' }
             userName={userName}
+            userUrl={userUrl}
             comments={comments}
             imageUrlPlaceholder={imageUrlPlaceholder}
-            altDescriptionPlaceholder={altDescriptionPlaceholder}
+            altDescriptionPlaceholder={ altDescriptionPlaceholder || '' }
             userNamePlaceholder={userNamePlaceholder}
+            id={id}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />

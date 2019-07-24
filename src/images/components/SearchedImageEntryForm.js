@@ -26,7 +26,7 @@ const styles = {
 }
 
 const SearchedImageEntryForm = (
-  { imageUrl, altDescription, userName, comments, handleSubmit, handleChange }) => (
+  { id, imageUrl, fullUrl, userUrl, altDescription, userName, comments, handleSubmit, handleChange }) => (
   <div className="image-form-container">
     <Paper>
       <CssBaseline />

@@ -87,7 +87,7 @@ const ImageEntryForm = (
               label="Your comments"
               name="comments"
               value={comments}
-              type="number"
+              type="text"
               onChange={handleChange}
             />
           </Grid>
