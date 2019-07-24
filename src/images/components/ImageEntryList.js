@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 
-import { indexReviews } from '../api'
+import { indexImageEntries } from '../api'
 import messages from '../messages'
 
 import LinearProgress from '@material-ui/core/LinearProgress'
@@ -22,40 +22,40 @@ const styles = {
   }
 }
 
-class Reviews extends Component {
+class ImageEntries extends Component {
   constructor () {
     super()
 
     this.state = {
-      reviews: []
+      images: []
     }
   }
 
   componentDidMount () {
     const { user, snackBar } = this.props
 
-    indexReviews(user)
+    indexImageEntries(user)
       .then((response) => {
-        if (response.data.reviews.length !== 0) {
+        if (response.data.images.length !== 0) {
           this.setState({
-            reviews: response.data.reviews
+            images: response.data.images
           })
         } else {
           this.setState({
-            noReviews: response.data.reviews
+            noImageEntries: response.data.images
           })
         }
       }
       )
       .catch(() => {
-        snackBar(messages.showReviewsFailure, { variant: 'warning' })
+        snackBar(messages.showImageEntriesFailure, { variant: 'warning' })
       })
   }
 
   render () {
-    const { reviews, noReviews } = this.state
+    const { images, noImageEntries } = this.state
 
-    if (noReviews) {
+    if (noImageEntries) {
       return (
         <div className="empty-results-container">
           <Grid container spacing={3}>
@@ -63,9 +63,9 @@ class Reviews extends Component {
               <Paper style={ styles.paper }>
                 <CssBaseline />
                 <div className="empty-results">
-                  <h3>No reviews</h3>
-                  <Button style={ styles.editBtn } component={Link} to="/create-review" variant="contained" color="primary">
-                    New Artist Review
+                  <h3>No images</h3>
+                  <Button style={ styles.editBtn } component={Link} to="/create-image-entry" variant="contained" color="primary">
+                    New Image Entry
                     <AddIcon />
                   </Button>
                 </div>
@@ -74,7 +74,7 @@ class Reviews extends Component {
           </Grid>
         </div>
       )
-    } else if (reviews.length === 0) {
+    } else if (images.length === 0) {
       return (
         <div className="empty-results-container">
           <Grid container>
@@ -94,12 +94,12 @@ class Reviews extends Component {
     return (
       <Fragment>
         <div>
-          <h1 className="my-reviews-header">Reviews</h1>
+          <h1 className="my-images-header">Your Image Entries</h1>
           <Grid container spacing={3}>
             <Grid item>
-              <div className="review-btn-submit">
-                <Button component={Link} to="/create-review" color="secondary" variant="contained" fullWidth>
-                  New Review
+              <div className="image-btn-submit">
+                <Button component={Link} to="/create-image-entry" color="secondary" variant="contained" fullWidth>
+                  New Image Entry
                 </Button>
               </div>
             </Grid>
@@ -111,16 +111,16 @@ class Reviews extends Component {
           </Grid>
         </div>
         <div>
-          {reviews.map(review => (
-            <Grid container key={review._id} spacing={3}>
+          {images.map(image => (
+            <Grid container key={image._id} spacing={3}>
               <Grid item xs={12}>
                 <Paper style={ styles.paper }>
-                  <div className="review-content" id={review._id}>
-                    <h2>Artist: {review.artistUsername}</h2>
-                    <h3><a href={review.profileUrl}>Profile</a></h3>
-                    <p>Artist Specialty: {review.artistSpecialty}</p>
-                    <p>You rated them as: {review.rating}</p>
-                    <Button component={Link} to={'/reviews/' + review._id} variant="contained" color="primary">
+                  <div className="image-content" id={image._id}>
+                    <h2>Artist: {image.artistUsername}</h2>
+                    <h3><a href={image.profileUrl}>Profile</a></h3>
+                    <p>Artist Specialty: {image.artistSpecialty}</p>
+                    <p>You rated them as: {image.rating}</p>
+                    <Button component={Link} to={'/images/' + image._id} variant="contained" color="primary">
                 View
                     </Button>
                   </div>
@@ -134,4 +134,4 @@ class Reviews extends Component {
   }
 }
 
-export default withRouter(Reviews)
+export default withRouter(ImageEntries)

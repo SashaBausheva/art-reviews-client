@@ -26,12 +26,12 @@ const styles = {
   }
 }
 
-const ReviewForm = (
-  { artistUsername, profileUrl, artistSpecialty, rating, handleSubmit, handleChange }) => (
-  <div className="review-form-container">
+const ImageEntryForm = (
+  { imageUrl, altDescription, userName, comments, handleSubmit, handleChange }) => (
+  <div className="image-form-container">
     <CssBaseline />
-    <div className="review-form">
-      <h1>Review Form Title</h1>
+    <div className="image-form">
+      <h1>Image Form Title Here</h1>
 
       <form onSubmit={handleSubmit}>
         <Grid className="form-input" container spacing={2}>
@@ -41,10 +41,10 @@ const ReviewForm = (
               variant="outlined"
               required
               fullWidth
-              id="artistUsername"
-              label="Artist"
-              name="artistUsername"
-              value={artistUsername}
+              id="imageUrl"
+              label="Unsplash Image URL"
+              name="imageUrl"
+              value={imageUrl}
               type="text"
               onChange={handleChange}
             />
@@ -55,10 +55,10 @@ const ReviewForm = (
               variant="outlined"
               required
               fullWidth
-              id="profileUrl"
-              label="Profile URL"
-              name="profileUrl"
-              value={profileUrl}
+              id="altDescription"
+              label="Image Title"
+              name="altDescription"
+              value={altDescription}
               type="text"
               onChange={handleChange}
             />
@@ -69,10 +69,10 @@ const ReviewForm = (
               variant="outlined"
               required
               fullWidth
-              id="artistSpecialty"
-              label="Artist Specialty"
-              name="artistSpecialty"
-              value={artistSpecialty}
+              id="userName"
+              label="User on Unsplash"
+              name="userName"
+              value={userName}
               type="text"
               onChange={handleChange}
             />
@@ -83,10 +83,10 @@ const ReviewForm = (
               variant="outlined"
               required
               fullWidth
-              id="rating"
-              label="Rating (1-10)"
-              name="rating"
-              value={rating}
+              id="comments"
+              label="Your comments"
+              name="comments"
+              value={comments}
               type="number"
               onChange={handleChange}
             />
@@ -101,7 +101,7 @@ const ReviewForm = (
           <Grid item>
             <div className="create-btn-submit">
               <Button type="submit" variant="contained" color="primary" style={ styles.editBtn }>Submit</Button>
-              <Button component={Link} to="/reviews" variant="contained" color="secondary" style={ styles.editBtn }>Cancel</Button>
+              <Button component={Link} to="/images" variant="contained" color="secondary" style={ styles.editBtn }>Cancel</Button>
             </div>
           </Grid>
           {/* // <Grid item xs={10} sm={5}>
@@ -115,4 +115,4 @@ const ReviewForm = (
   </div>
 )
 
-export default withRouter(ReviewForm)
+export default withRouter(ImageEntryForm)

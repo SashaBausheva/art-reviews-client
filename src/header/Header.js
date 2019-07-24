@@ -67,7 +67,7 @@ class Header extends Component {
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button component={Link} to="/reviews">
+          <ListItem button component={Link} to="/images">
             <ListItemIcon>
               <RateReview />
             </ListItemIcon>

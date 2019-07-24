@@ -1,9 +1,9 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const indexReviews = user => {
+export const indexImageEntries = user => {
   return axios({
-    url: apiUrl + '/reviews',
+    url: apiUrl + '/images',
     method: 'GET',
     headers: {
       'Authorization': `Token token=${user.token}`
@@ -11,9 +11,9 @@ export const indexReviews = user => {
   })
 }
 
-export const showReview = (user, id) => {
+export const showImageEntry = (user, id) => {
   return axios({
-    url: `${apiUrl}/reviews/${id}`,
+    url: `${apiUrl}/images/${id}`,
     method: 'GET',
     headers: {
       'Authorization': `Token token=${user.token}`
@@ -21,9 +21,9 @@ export const showReview = (user, id) => {
   })
 }
 
-export const deleteReview = (user, id) => {
+export const deleteImageEntry = (user, id) => {
   return axios({
-    url: `${apiUrl}/reviews/${id}`,
+    url: `${apiUrl}/images/${id}`,
     method: 'DELETE',
     headers: {
       'Authorization': `Token token=${user.token}`
@@ -31,25 +31,25 @@ export const deleteReview = (user, id) => {
   })
 }
 
-export const createReview = (user, review) => {
+export const createImageEntry = (user, image) => {
   return axios({
-    url: `${apiUrl}/reviews`,
+    url: `${apiUrl}/images`,
     method: 'POST',
     headers: {
       'Authorization': `Token token=${user.token}`
     },
-    data: { review: review }
+    data: { image: image }
   })
 }
 
-export const editReview = (user, id, review) => {
+export const editImageEntry = (user, id, image) => {
   return axios({
-    url: `${apiUrl}/reviews/${id}`,
+    url: `${apiUrl}/images/${id}`,
     method: 'PATCH',
     headers: {
       'Authorization': `Token token=${user.token}`
     },
-    data: { review: review }
+    data: { image: image }
   })
 }
 

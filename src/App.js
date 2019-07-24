@@ -7,12 +7,13 @@ import SignUp from './auth/components/SignUp'
 import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
-import CreateReview from './reviews/components/CreateReview'
-import Review from './reviews/components/Review'
-import ReviewsList from './reviews/components/ReviewsList'
-import EditReview from './reviews/components/EditReview'
+import CreateImageEntry from './images/components/CreateImageEntry'
+import ImageEntry from './images/components/ImageEntry'
+import ImageEntryList from './images/components/ImageEntryList'
+import EditImageEntry from './images/components/EditImageEntry'
 import Home from './Home.js'
-import SearchImages from './reviews/components/SearchImages'
+import SearchImages from './images/components/SearchImages'
+import CreateImageEntryFromSearch from './images/components/CreateImageEntryFromSearch'
 
 import { SnackbarProvider } from 'notistack'
 
@@ -46,20 +47,23 @@ class App extends Component {
           <Route path='/sign-in' render={() => (
             <SignIn alert={this.alert} setUser={this.setUser} />
           )} />
-          <AuthenticatedRoute user={user} path='/create-review' render={() => (
-            <CreateReview alert={this.alert} user={user} />
+          <AuthenticatedRoute user={user} path='/create-image-entry' render={() => (
+            <CreateImageEntry alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/create-image-entry-from-search' render={() => (
+            <CreateImageEntryFromSearch alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/image-search' render={() => (
             <SearchImages alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/reviews' render={() => (
-            <ReviewsList alert={this.alert} user={user} />
+          <AuthenticatedRoute user={user} exact path='/images' render={() => (
+            <ImageEntryList alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/reviews/:id' render={() => (
-            <Review alert={this.alert} user={user} />
+          <AuthenticatedRoute user={user} exact path='/images/:id' render={() => (
+            <ImageEntry alert={this.alert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/reviews/:id/edit' render={() => (
-            <EditReview alert={this.alert} user={user} />
+          <AuthenticatedRoute user={user} path='/images/:id/edit' render={() => (
+            <EditImageEntry alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />

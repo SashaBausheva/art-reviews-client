@@ -9,7 +9,7 @@ const styles = {
 const authenticatedHome = (
   <React.Fragment>
     <div>
-      <h2 style={styles.h2}>You can now add artists to your collection!</h2>
+      <h2 style={styles.h2}>You can now add images to your collection!</h2>
     </div>
   </React.Fragment>
 )
@@ -17,7 +17,7 @@ const authenticatedHome = (
 const unauthenticatedHome = (
   <React.Fragment>
     <div>
-      <h2 style={styles.h2}>Please sign in to see your reviews or add artists to your collection.</h2>
+      <h2 style={styles.h2}>Please sign in to see your image entries or add images to your collection.</h2>
     </div>
   </React.Fragment>
 )

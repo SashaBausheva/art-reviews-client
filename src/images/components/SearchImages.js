@@ -12,6 +12,17 @@ import Grid from '@material-ui/core/Grid'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import ImagesResults from './ImagesResults'
 
+const styles = {
+  paper: {
+    maxWidth: '600px',
+    padding: '2rem',
+    margin: '2rem auto'
+  },
+  editBtn: {
+    margin: '.2rem'
+  }
+}
+
 class SearchImages extends Component {
   constructor () {
     super()
@@ -53,13 +64,8 @@ class SearchImages extends Component {
     if (empty) {
       return (
         <div>
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-          >
-            <Grid item xs={10} sm={10}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
               <div className="image-search-header">
                 <h1>There is nothing like that in the database! Try another key word?</h1>
               </div>
@@ -71,30 +77,28 @@ class SearchImages extends Component {
               <div className="search-images-form">
 
                 <form onSubmit={this.submitSearch}>
-                  <Grid className="form-input" container>
+                  <Grid container spacing={3}>
                     <Grid item xs={12}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name='query'
-                        value={query}
-                        type='text'
-                        placeholder='What are you looking for today?'
-                        onChange={this.handleChange} />
+                      <Paper style={ styles.paper }>
+                        <TextField
+                          variant="outlined"
+                          required
+                          name='query'
+                          value={query}
+                          type='text'
+                          placeholder='What are you looking for today?'
+                          onChange={this.handleChange} />
+                      </Paper>
                     </Grid>
                   </Grid>
 
-                  <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                  >
-                    <Grid item xs={10} sm={4}>
-                      <div className="search-btn-submit">
-                        <Button type="submit" variant="contained" color="primary" fullWidth>Search</Button>
-                      </div>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                      <Paper style={ styles.paper }>
+                        <div className="search-btn-submit">
+                          <Button style={styles.editBtn} type="submit" variant="contained" color="primary" fullWidth>Search</Button>
+                        </div>
+                      </Paper>
                     </Grid>
                   </Grid>
                 </form>
@@ -114,13 +118,8 @@ class SearchImages extends Component {
     } else {
       return (
         <div>
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-          >
-            <Grid item xs={10} sm={10}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
               <div className="search-images-header">
                 <h1>What would you like to find today?</h1>
               </div>
@@ -128,34 +127,30 @@ class SearchImages extends Component {
           </Grid>
 
           <div className='search-images-container'>
-            <Paper>
+            <Paper style={styles.paper}>
               <CssBaseline />
               <div className="search-images-form">
                 <form onSubmit={this.submitSearch}>
-                  <Grid className="form-input" container>
+                  <Grid
+                    className="form-input"
+                    container
+                    justify="center"
+                    alignItems="center">
                     <Grid item xs={12}>
                       <TextField
                         variant="outlined"
                         required
-                        fullWidth
                         name='query'
                         value={query}
                         type='text'
+                        fullWidth
                         placeholder='Keyword'
                         onChange={this.handleChange} />
-                    </Grid>
-                  </Grid>
-
-                  <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                  >
-                    <Grid item xs={10} sm={4}>
-                      <div className="search-btn-submit">
-                        <Button type="submit" variant="contained" color="primary" fullWidth>Search</Button>
-                      </div>
+                      <Grid item>
+                        <div className="search-btn-submit">
+                          <Button style={styles.editBtn} type="submit" variant="contained" color="primary">Search</Button>
+                        </div>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </form>
@@ -168,7 +163,8 @@ class SearchImages extends Component {
               <ImagesResults key={image.id}
                 name={image.alt_description}
                 imageUrl={image.urls.regular}
-                alt={image.alt_description}
+                altDescription={image.alt_description}
+                userName={image.user.name}
                 id={image.id}
               />)}
           </div>
