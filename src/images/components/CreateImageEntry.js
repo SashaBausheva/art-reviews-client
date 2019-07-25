@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
 import { withSnackbar } from 'notistack'
 
-import ReviewForm from './ReviewForm'
-import { createReview } from '../api'
+import ImageEntryForm from './ImageEntryForm'
+import { createImageEntry } from '../api'
 import messages from '../messages'
 
 import Grid from '@material-ui/core/Grid'
@@ -24,16 +24,18 @@ const styles = {
   }
 }
 
-class CreateReview extends Component {
+class CreateImageEntry extends Component {
   constructor () {
     super()
 
     this.state = {
-      review: {
-        artistUsername: '',
-        profileUrl: '',
-        artistSpecialty: '',
-        rating: ''
+      image: {
+        imageUrl: '',
+        fullUrl: '',
+        userUrl: '',
+        altDescription: '',
+        userName: '',
+        comments: ''
       },
       created: false,
       message: null
@@ -41,50 +43,52 @@ class CreateReview extends Component {
   }
 
   handleChange = (event) => {
-    this.setState({ review: {
-      ...this.state.review, [event.target.name]: event.target.value
+    this.setState({ image: {
+      ...this.state.image, [event.target.name]: event.target.value
     } })
   }
 
     handleSubmit = (event) => {
       event.preventDefault()
       const { user, enqueueSnackbar } = this.props
-      const { review } = this.state
-      createReview(user, review)
+      const { image } = this.state
+      createImageEntry(user, image)
         .then(response => this.setState({
           created: true,
-          review: response.data.review
+          image: response.data.image
         }))
-        .then(() => enqueueSnackbar(messages.createReviewSuccess, 'success'))
+        .then(() => enqueueSnackbar(messages.createImageEntrySuccess, { variant: 'success' }))
         .catch(() => {
           this.setState({
-            review: { ...review, artistUsername: '', profileUrl: '', artistSpecialty: '', rating: '' }
+            image: { ...image, imageUrl: '', fullUrl: '', userUrl: '', altDescription: '', userName: '', comments: '' }
           })
-          enqueueSnackbar(messages.createReviewFailure, 'error')
+          enqueueSnackbar(messages.createImageEntryFailure, { variant: 'error' })
         }
         )
     }
 
     render () {
-      const { review, created } = this.state
+      const { image, created } = this.state
 
       if (created) {
         return <Redirect to={{
-          pathname: '/reviews'
+          pathname: '/images'
         }} />
       }
 
-      const { artistUsername, profileUrl, artistSpecialty, rating } = review
+      const { imageUrl, fullUrl, userUrl, altDescription, userName, comments } = image
       return (
         <Fragment>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper style={ styles.paper }>
-                <ReviewForm
-                  artistUsername={artistUsername}
-                  profileUrl={profileUrl}
-                  artistSpecialty={artistSpecialty}
-                  rating={rating}
+                <ImageEntryForm
+                  imageUrl={imageUrl}
+                  fullUrl={fullUrl}
+                  userUrl={userUrl}
+                  altDescription={altDescription}
+                  userName={userName}
+                  comments={comments}
                   // gallery={this.state.review.artistUsername.gallery}
                   handleChange={this.handleChange}
                   handleSubmit={this.handleSubmit}
@@ -97,4 +101,4 @@ class CreateReview extends Component {
     }
 }
 
-export default withSnackbar(withRouter(CreateReview))
+export default withSnackbar(withRouter(CreateImageEntry))

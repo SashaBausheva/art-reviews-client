@@ -3,7 +3,7 @@ import { withRouter, Link, Redirect } from 'react-router-dom'
 import { withSnackbar } from 'notistack'
 
 import messages from '../messages'
-import { showReview, deleteReview } from '../api'
+import { showImageEntry, deleteImageEntry } from '../api'
 // import '../../../css/reviews/Review.scss'
 
 import LinearProgress from '@material-ui/core/LinearProgress'
@@ -12,22 +12,32 @@ import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 
 const styles = {
+  card: {
+    maxWidth: '50%'
+  },
+  div: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   editBtn: {
     margin: '.4rem'
   },
+  media: {
+    height: 300
+  },
   paper: {
-    maxWidth: '600px',
+    maxWidth: '800px',
     padding: '2rem',
     margin: '2rem auto'
   }
 }
 
-class Review extends Component {
+class ImageEntry extends Component {
   constructor () {
     super()
 
     this.state = {
-      review: null,
+      image: null,
       deleted: false
     }
   }
@@ -35,10 +45,10 @@ class Review extends Component {
   componentDidMount () {
     const { user, enqueueSnackbar } = this.props
     const id = this.props.match.params.id
-    showReview(user, id)
-      .then(response => this.setState({ review: response.data.review }))
+    showImageEntry(user, id)
+      .then(response => this.setState({ image: response.data.image }))
       .catch(() => {
-        enqueueSnackbar(messages.showReviewFailure, 'success')
+        enqueueSnackbar(messages.showImageEntryFailure, { variant: 'success' })
       })
   }
 
@@ -46,19 +56,19 @@ class Review extends Component {
     event.preventDefault()
     const { user, enqueueSnackbar } = this.props
     const id = this.props.match.params.id
-    deleteReview(user, id)
+    deleteImageEntry(user, id)
       .then(() => this.setState({ deleted: true }))
-      .then(() => enqueueSnackbar(messages.deleteReviewSuccess, 'success'))
+      .then(() => enqueueSnackbar(messages.deleteImageEntrySuccess, { variant: 'success' }))
       .catch(() => {
-        enqueueSnackbar(messages.deleteReviewFailure, 'error')
+        enqueueSnackbar(messages.deleteImageEntryFailure, { variant: 'error' })
       })
   }
 
   render () {
-    if (!this.state.review) {
+    if (!this.state.image) {
       return (
         <div>
-          <h3>Grabbing your reviews.</h3>
+          <h3>Loading...</h3>
           <LinearProgress />
         </div>
       )
@@ -66,22 +76,22 @@ class Review extends Component {
 
     if (this.state.deleted) {
       return <Redirect to={{
-        pathname: '/reviews'
+        pathname: '/images'
       }} />
     }
 
-    const { artistUsername, profileUrl, artistSpecialty, rating } = this.state.review
+    const { imageUrl, altDescription, userName, comments } = this.state.image
 
     return (
       <Fragment>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper style={ styles.paper }>
-              <div className="review-content" >
-                <h2>Artist: {artistUsername}</h2>
-                <h3><a href={profileUrl}>Profile</a></h3>
-                <p>Artist Specialty: {artistSpecialty}</p>
-                <p>You rated them as: {rating}</p>
+              <div className="image-content" >
+                <h3><a href={imageUrl}>Link to Image</a></h3>
+                <h2>Name: {altDescription}</h2>
+                <p>User on Unsplash: {userName}</p>
+                <p>Your comments: {comments}</p>
                 <Grid container
                   direction="row"
                   justify="center"
@@ -89,12 +99,12 @@ class Review extends Component {
                   spacing={2}>
                   <Grid item>
                     <Button style={ styles.editBtn } onClick={this.handleDelete} variant="contained" color="secondary">
-                    Delete Review
+                    Delete Image Entry
                     </Button>
                   </Grid>
                   <Grid item>
                     <Button style={ styles.editBtn } component={Link} to={this.props.match.url + '/edit'} variant="contained" color="primary">
-                      Edit Review
+                      Edit Image Entry
                     </Button>
                   </Grid>
                 </Grid>
@@ -104,8 +114,8 @@ class Review extends Component {
                   alignItems="center">
                   <Grid item>
                     <div style={ styles.editBtn } className="edit-btn">
-                      <Button component={Link} to="/reviews" variant="contained" color="primary">
-                        Back to your reviews
+                      <Button component={Link} to="/images" variant="contained" color="primary">
+                        Back to your image entries
                       </Button>
                     </div>
                   </Grid>
@@ -119,4 +129,4 @@ class Review extends Component {
   }
 }
 
-export default withSnackbar(withRouter(Review))
+export default withSnackbar(withRouter(ImageEntry))

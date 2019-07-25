@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
 import { withSnackbar } from 'notistack'
 
-import ReviewForm from './ReviewForm'
-import { showReview, editReview } from '../api'
+import ImageEntryForm from './ImageEntryForm'
+import { showImageEntry, editImageEntry } from '../api'
 import messages from '../messages'
 
 import Grid from '@material-ui/core/Grid'
@@ -24,65 +24,65 @@ const styles = {
   }
 }
 
-class EditReview extends Component {
+class EditImageEntry extends Component {
   constructor () {
     super()
 
     this.state = {
-      review: null,
+      image: null,
       deleted: false,
       edited: false
     }
   }
 
   componentDidMount () {
-    const { user, snackBar } = this.props
+    const { user, enqueueSnackbar } = this.props
     const id = this.props.match.params.id
-    showReview(user, id)
-      .then(response => this.setState({ review: response.data.review }))
+    showImageEntry(user, id)
+      .then(response => this.setState({ image: response.data.image }))
       .catch(() => {
-        snackBar(messages.showReviewFailure, 'warning')
+        enqueueSnackbar(messages.showImageEntryFailure, { variant: 'error' })
       })
   }
 
   handleChange = (event) => {
-    this.setState({ review: {
-      ...this.state.review, [event.target.name]: event.target.value
+    this.setState({ image: {
+      ...this.state.image, [event.target.name]: event.target.value
     } })
   }
 
     handleSubmit = (event) => {
       event.preventDefault()
       const { user, enqueueSnackbar } = this.props
-      const { review } = this.state
+      const { image } = this.state
       const id = this.props.match.params.id
-      editReview(user, id, review)
+      editImageEntry(user, id, image)
         .then(response => this.setState({
           edited: true,
-          review: response.data.review
+          image: response.data.image
         }))
-        .then(() => enqueueSnackbar(messages.editReviewSuccess, { variant: 'success' }))
+        .then(() => enqueueSnackbar(messages.editImageEntrySuccess, { variant: 'success' }))
         .catch(() => {
           this.setState({
-            review: { ...review, artistUsername: '', profileUrl: '', artistSpecialty: '', rating: '' }
+            image: { ...image, imageUrl: '', altDescription: '', userName: '', comments: '' }
           })
-          enqueueSnackbar(messages.editReviewFailure, { variant: 'error' })
+          enqueueSnackbar(messages.editImageEntryFailure, { variant: 'error' })
         }
         )
     }
 
     render () {
-      const { review, edited } = this.state
-      console.log(review)
+      const { image, edited } = this.state
+      console.log(image)
 
       if (edited) {
         console.log(edited)
         return <Redirect to={{
-          pathname: `/reviews/${this.props.match.params.id}`
+          pathname: `/images/${this.props.match.params.id}`
         }} />
       }
 
-      if (!this.state.review) {
+      if (!this.state.image) {
         return (
           <div>
             <h3>Loading...</h3>
@@ -90,17 +90,17 @@ class EditReview extends Component {
         )
       }
 
-      const { artistUsername, profileUrl, artistSpecialty, rating } = review
+      const { imageUrl, altDescription, userName, comments } = image
       return (
         <Fragment>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper style={ styles.paper }>
-                <ReviewForm
-                  artistUsername={artistUsername}
-                  profileUrl={profileUrl}
-                  artistSpecialty={artistSpecialty}
-                  rating={rating}
+                <ImageEntryForm
+                  imageUrl={imageUrl}
+                  altDescription={altDescription}
+                  userName={userName}
+                  comments={comments}
                   // gallery={this.state.review.artistUsername.gallery}
                   handleChange={this.handleChange}
                   handleSubmit={this.handleSubmit}
@@ -113,4 +113,4 @@ class EditReview extends Component {
     }
 }
 
-export default withSnackbar(withRouter(EditReview))
+export default withSnackbar(withRouter(EditImageEntry))

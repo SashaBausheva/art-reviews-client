@@ -17,7 +17,8 @@ import ExitToApp from '@material-ui/icons/ExitToApp'
 import Home from '@material-ui/icons/Home'
 import Input from '@material-ui/icons/Input'
 import Lock from '@material-ui/icons/Lock'
-import RateReview from '@material-ui/icons/RateReview'
+import ImageSearch from '@material-ui/icons/ImageSearch'
+import Collections from '@material-ui/icons/Collections'
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser'
 
 const styles = {
@@ -56,7 +57,7 @@ class Header extends Component {
       <div style={styles.list}>
         <div className="side-nav-title">
           <Typography variant="h6" style={styles.title}>
-            Uber, but for Taxis
+            Picture It
           </Typography>
         </div>
         <Divider />
@@ -67,23 +68,29 @@ class Header extends Component {
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button component={Link} to="/reviews">
+          <ListItem button component={Link} to="/images">
             <ListItemIcon>
-              <RateReview />
+              <Collections />
             </ListItemIcon>
-            <ListItemText primary="My Reviews" />
+            <ListItemText primary="My Collection" />
+          </ListItem>
+          <ListItem button component={Link} to="/image-search">
+            <ListItemIcon>
+              <ImageSearch />
+            </ListItemIcon>
+            <ListItemText primary="Search Images" />
           </ListItem>
           {/* <ListItem button component={Link} to="/LINK">
             <ListItemIcon>
               And another option
             </ListItemIcon>
-            <ListItemText primary="Search Beers" />
+            <ListItemText primary="" />
           </ListItem>
-          <ListItem button component={Link} to="/yelp-search">
+          <ListItem button component={Link} to="">
             <ListItemIcon>
               One more option
             </ListItemIcon>
-            <ListItemText primary="Find Breweries" />
+            <ListItemText primary="" />
           </ListItem> */}
         </List>
         <Divider />
@@ -108,7 +115,7 @@ class Header extends Component {
       <div style={styles.list}>
         <div className="side-nav-title">
           <Typography variant="h6" style={styles.title}>
-            Uber, but for Taxis
+            Picture It
           </Typography>
         </div>
         <Divider />
@@ -157,7 +164,7 @@ class Header extends Component {
               </div>
             </Drawer>
             <Typography variant="h6" style={styles.title}>
-              Uber, but for Taxis
+              Picture It
             </Typography>
             { this.props.user && <span>Welcome, {this.props.user.email}</span>}
             {/* user ? (
