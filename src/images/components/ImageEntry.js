@@ -4,29 +4,47 @@ import { withSnackbar } from 'notistack'
 
 import messages from '../messages'
 import { showImageEntry, deleteImageEntry } from '../api'
-// import '../../../css/reviews/Review.scss'
 
 import LinearProgress from '@material-ui/core/LinearProgress'
-import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
+
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import CardActions from '@material-ui/core/CardActions'
+import Typography from '@material-ui/core/Typography'
+
+import Fab from '@material-ui/core/Fab'
+import DeleteForever from '@material-ui/icons/DeleteForever'
+import Edit from '@material-ui/icons/Edit'
+import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
 
 const styles = {
-  card: {
-    maxWidth: '50%'
+  altDescription: {
+    textTransform: 'capitalize',
+    margin: '.5rem auto'
   },
-  div: {
-    alignItems: 'center',
-    justifyContent: 'center'
+  backButton: {
+    position: 'absolute'
+  },
+  backButtonIcon: {
+    margin: '0 auto'
+  },
+  card: {
+    maxWidth: '70%',
+    margin: '2rem auto'
+  },
+  cardActions: {
+    width: '100%',
+    margin: '0'
   },
   editBtn: {
-    margin: '.4rem'
+    margin: '.2rem auto'
   },
   media: {
-    height: 300
+    height: 400
   },
   paper: {
-    maxWidth: '800px',
     padding: '2rem',
     margin: '2rem auto'
   }
@@ -80,50 +98,57 @@ class ImageEntry extends Component {
       }} />
     }
 
-    const { imageUrl, altDescription, userName, comments } = this.state.image
+    const { imageUrl, fullUrl, userUrl, altDescription, userName, comments } = this.state.image
 
     return (
       <Fragment>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Paper style={ styles.paper }>
-              <div className="image-content" >
-                <h3><a href={imageUrl}>Link to Image</a></h3>
-                <h2>Name: {altDescription}</h2>
-                <p>User on Unsplash: {userName}</p>
-                <p>Your comments: {comments}</p>
-                <Grid container
-                  direction="row"
-                  justify="center"
-                  alignItems="center"
-                  spacing={2}>
-                  <Grid item>
-                    <Button style={ styles.editBtn } onClick={this.handleDelete} variant="contained" color="secondary">
-                    Delete Image Entry
+        <Fab color="primary" aria-label="add" style={styles.backButton} component={Link} to="/images" >
+          <ArrowBackIos style={styles.backBuittonIcon}/>
+        </Fab>
+        <Card style={styles.card}>
+          <CardMedia
+            style={styles.media}
+            image={imageUrl}
+            title={altDescription}
+          />
+          <CardContent>
+            <div className="image-content" >
+              <Typography variant="body2" color="textSecondary" component="p">
+               By <a href={userUrl}>{userName}</a> on Unsplash
+              </Typography>
+              <Typography gutterBottom variant="h5" component="h2" style={styles.altDescription}>
+                {altDescription}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+              Your notes: {comments}
+              </Typography>
+            </div>
+            <div style={{ flex: 1 }}>
+              <CardActions styles={styles.cardActions}>
+                <span style={{ flex: 1 }} className="float-left">
+                  <a href={imageUrl} target="_blank" rel="noopener noreferrer">
+                    <Button size="small" color="primary">
+                    Full Size
                     </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button style={ styles.editBtn } component={Link} to={this.props.match.url + '/edit'} variant="contained" color="primary">
-                      Edit Image Entry
+                  </a>
+                  <a href={fullUrl} target="_blank" rel="noopener noreferrer">
+                    <Button size="small" color="primary">
+                      High Resolution
                     </Button>
-                  </Grid>
-                </Grid>
-                <Grid container
-                  direction="row"
-                  justify="center"
-                  alignItems="center">
-                  <Grid item>
-                    <div style={ styles.editBtn } className="edit-btn">
-                      <Button component={Link} to="/images" variant="contained" color="primary">
-                        Back to your image entries
-                      </Button>
-                    </div>
-                  </Grid>
-                </Grid>
-              </div>
-            </Paper>
-          </Grid>
-        </Grid>
+                  </a>
+                </span>
+                <span className="float-right">
+                  <Button component={Link} to={this.props.match.url + '/edit'} color="primary" size="small">
+                    Edit <Edit />
+                  </Button>
+                  <Button onClick={this.handleDelete} color="secondary" size="small">
+                  Delete <DeleteForever color="secondary" />
+                  </Button>
+                </span>
+              </CardActions>
+            </div>
+          </CardContent>
+        </Card>
       </Fragment>
     )
   }

@@ -21,8 +21,14 @@ import Typography from '@material-ui/core/Typography'
 import DeleteForever from '@material-ui/icons/DeleteForever'
 
 const styles = {
+  altDescription: {
+    textTransform: 'capitalize',
+    marginTop: '.2rem',
+    marginBottom: '.5rem'
+  },
   card: {
-    maxWidth: '80%'
+    maxWidth: '80%',
+    margin: '2rem auto'
   },
   div: {
     alignItems: 'center',
@@ -74,25 +80,6 @@ class ImageEntries extends Component {
       })
   }
 
-  componentWillUpdate (nextProps, nextState) {
-    if (nextState.deleted === true) {
-      indexImageEntries(this.props.user)
-        .then((response) => {
-          if (response.data.images.length !== 0) {
-            this.setState({
-              images: response.data.images, deleted: false
-            })
-          } else {
-            this.setState({
-              noImageEntries: response.data.images
-            })
-          }
-        }
-        )
-        .catch(() => console.error)
-    }
-  }
-
   handleDelete = (event) => {
     event.preventDefault()
     const { user, enqueueSnackbar } = this.props
@@ -100,6 +87,22 @@ class ImageEntries extends Component {
     console.log(event)
     deleteImageEntry(user, id)
       .then(() => this.setState({ deleted: true }))
+      .then(() => {
+        indexImageEntries(this.props.user)
+          .then((response) => {
+            if (response.data.images.length !== 0) {
+              this.setState({
+                images: response.data.images, deleted: false
+              })
+            } else {
+              this.setState({
+                noImageEntries: response.data.images
+              })
+            }
+          }
+          )
+          .catch(() => console.error)
+      })
       .then(() => enqueueSnackbar(messages.deleteImageEntrySuccess, { variant: 'success' }))
       .catch(() => enqueueSnackbar(messages.deleteImageEntryFailure, { variant: 'error' })
       )
@@ -175,14 +178,11 @@ class ImageEntries extends Component {
                       title={image.altDescription}
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
+                      <Typography gutterBottom variant="h5" component="h2" style={ styles.altDescription }>
                         {image.altDescription}
                       </Typography>
                       <Typography variant="body2" color="textSecondary" component="p">
-                        By <a href={image.userUrl}>{image.userName}</a> on Unsplash
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary" component="p">
-                        Notes: {image.comments}
+                        By <a href={`${image.userUrl}?utm_source=picture_it&utm_medium=referral`} target="_blank" rel="noopener noreferrer">{image.userName}</a> on Unsplash
                       </Typography>
                     </CardContent>
                   </CardActionArea>

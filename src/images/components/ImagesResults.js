@@ -10,6 +10,10 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
 const styles = {
+  altDescription: {
+    textTransform: 'capitalize',
+    marginBottom: '.5rem'
+  },
   card: {
     maxWidth: '80%',
     margin: '2rem auto'
@@ -23,10 +27,6 @@ const styles = {
   },
   media: {
     height: 400
-  },
-  paper: {
-    padding: '2rem',
-    margin: '2rem auto'
   }
 }
 
@@ -40,11 +40,11 @@ const ImagesResults = ({ id, imageUrl, fullUrl, userUrl, altDescription, userNam
           title={altDescription}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2" style={styles.altDescription}>
             {altDescription}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-           By <a href="LINK HERE">{userName}</a> on Unsplash
+          By <a href={`${userUrl}?utm_source=picture_it&utm_medium=referral`} target="_blank" rel="noopener noreferrer">{userName}</a> on Unsplash
           </Typography>
         </CardContent>
       </CardActionArea>

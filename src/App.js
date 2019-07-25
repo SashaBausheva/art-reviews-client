@@ -35,7 +35,7 @@ class App extends Component {
     const { user } = this.state
 
     return (
-      <SnackbarProvider maxSnack={3}>
+      <SnackbarProvider maxSnack={3} autoHideDuration={2000}>
         <Header user={user} />
         <main className="container">
           <Route path='/sign-up' render={() => (
