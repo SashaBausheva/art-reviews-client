@@ -20,7 +20,7 @@ import Typography from '@material-ui/core/Typography'
 
 const styles = {
   card: {
-    maxWidth: '50%'
+    maxWidth: '80%'
   },
   div: {
     alignItems: 'center',
@@ -70,6 +70,25 @@ class ImageEntries extends Component {
       })
   }
 
+  componentWillUpdate (nextProps, nextState) {
+    if (nextState.deleted === true) {
+      indexImageEntries(this.props.user)
+        .then((response) => {
+          if (response.data.images.length !== 0) {
+            this.setState({
+              images: response.data.images, deleted: false
+            })
+          } else {
+            this.setState({
+              noImageEntries: response.data.images
+            })
+          }
+        }
+        )
+        .catch(() => console.error)
+    }
+  }
+
   handleDelete = (event) => {
     event.preventDefault()
     const { user, enqueueSnackbar } = this.props
@@ -94,8 +113,8 @@ class ImageEntries extends Component {
                 <CssBaseline />
                 <div className="empty-results">
                   <h3>No images</h3>
-                  <Button style={ styles.editBtn } component={Link} to="/create-image-entry" variant="contained" color="primary">
-                    New Image Entry
+                  <Button style={ styles.editBtn } component={Link} to="/image-search" variant="contained" color="primary">
+                    Find Images
                     <AddIcon />
                   </Button>
                 </div>
@@ -128,8 +147,8 @@ class ImageEntries extends Component {
           <Grid container spacing={3}>
             <Grid item>
               <div className="image-btn-submit">
-                <Button component={Link} to="/create-image-entry" color="secondary" variant="contained" fullWidth>
-                  New Image Entry
+                <Button component={Link} style={styles.editBtn} to="/image-search" color="secondary" variant="contained" fullWidth>
+                  Find More Images <AddIcon />
                 </Button>
               </div>
             </Grid>

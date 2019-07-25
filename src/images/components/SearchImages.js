@@ -30,7 +30,8 @@ class SearchImages extends Component {
     this.state = {
       query: '',
       empty: false,
-      images: []
+      images: [],
+      searched: false
     }
   }
 
@@ -41,10 +42,11 @@ class SearchImages extends Component {
   submitSearch = event => {
     const { query } = this.state
     const { user, snackBar } = this.props
+    console.log('event is ', event)
     event.preventDefault()
     findImages(query, user)
       .then((res) => {
-        if (res.data.results) {
+        if ((res.data.results).length !== 0) {
           console.log(res)
           this.setState({ images: res.data.results, query: '', empty: false })
           console.log('this is images: ', this.state.images)
@@ -63,72 +65,66 @@ class SearchImages extends Component {
 
     if (empty) {
       return (
-        <div>
+        <div className='search-images-container'>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <div className="image-search-header">
-                <h1>There is nothing like that in the database! Try another key word?</h1>
+                <h1>What would you like to find today?</h1>
               </div>
             </Grid>
           </Grid>
-          <div className='search-images-container'>
-            <Paper>
-              <CssBaseline />
-              <div className="search-images-form">
+          <Paper style={styles.paper}>
+            <CssBaseline />
 
-                <form onSubmit={this.submitSearch}>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                      <Paper style={ styles.paper }>
-                        <TextField
-                          variant="outlined"
-                          required
-                          name='query'
-                          value={query}
-                          type='text'
-                          placeholder='What are you looking for today?'
-                          onChange={this.handleChange} />
-                      </Paper>
+            <div className="search-images-form">
+              <form onSubmit={this.submitSearch}>
+                <Grid
+                  className="form-input"
+                  container
+                  justify="center"
+                  alignItems="center">
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      name='query'
+                      value={query}
+                      type='text'
+                      fullWidth
+                      placeholder='Try another keyword?'
+                      onChange={this.handleChange} />
+                    <Grid item>
+                      <div className="search-btn-submit">
+                        <Button style={styles.editBtn} type="submit" onClick={this.submitSearch} value={1} variant="contained" color="primary">Search</Button>
+                      </div>
+                      <div className="search-btn-submit">
+                        <Button style={styles.editBtn} type="submit" onClick={this.submitSearch} value={2} variant="contained" color="primary">Search</Button>
+                      </div>
                     </Grid>
                   </Grid>
-
-                  <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                      <Paper style={ styles.paper }>
-                        <div className="search-btn-submit">
-                          <Button style={styles.editBtn} type="submit" variant="contained" color="primary" fullWidth>Search</Button>
-                        </div>
-                      </Paper>
-                    </Grid>
-                  </Grid>
-                </form>
-              </div>
-            </Paper>
-            <div className="empty-results-container">
-              <Paper>
-                <CssBaseline />
-                <div className="empty-results">
-                  <h3>Could not find any results.</h3 >
-                </div>
-              </Paper>
+                </Grid>
+              </form>
             </div>
+          </Paper>
+          <div className="empty-search-results">
+            <h4>We were unable to find anything for that keyword.</h4>
           </div>
         </div>
       )
     } else {
       return (
         <div>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <div className="search-images-header">
-                <h1>What would you like to find today?</h1>
-              </div>
-            </Grid>
-          </Grid>
-
           <div className='search-images-container'>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <div className="image-search-header">
+                  <h1>What would you like to find today?</h1>
+                </div>
+              </Grid>
+            </Grid>
             <Paper style={styles.paper}>
               <CssBaseline />
+
               <div className="search-images-form">
                 <form onSubmit={this.submitSearch}>
                   <Grid
