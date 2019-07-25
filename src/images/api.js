@@ -62,3 +62,13 @@ export const findImages = (query, user) => {
     }
   })
 }
+
+export const findRandomImage = (user) => {
+  return axios({
+    url: 'https://api.unsplash.com//photos/random?client_id=27e3739785506041845aa8e7be75f77231b1baaeb1ddadc128233d959a39e201&',
+    method: 'GET',
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    }
+  })
+}

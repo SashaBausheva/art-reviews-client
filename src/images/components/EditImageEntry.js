@@ -36,12 +36,12 @@ class EditImageEntry extends Component {
   }
 
   componentDidMount () {
-    const { user, snackBar } = this.props
+    const { user, enqueueSnackbar } = this.props
     const id = this.props.match.params.id
     showImageEntry(user, id)
       .then(response => this.setState({ image: response.data.image }))
       .catch(() => {
-        snackBar(messages.showImageEntryFailure, { variant: 'warning' })
+        enqueueSnackbar(messages.showImageEntryFailure, { variant: 'error' })
       })
   }
 

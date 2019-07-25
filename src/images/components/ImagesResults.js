@@ -11,20 +11,20 @@ import Typography from '@material-ui/core/Typography'
 
 const styles = {
   card: {
-    maxWidth: '50%'
+    maxWidth: '80%',
+    margin: '2rem auto'
   },
   div: {
     alignItems: 'center',
     justifyContent: 'center'
   },
   editBtn: {
-    margin: '.2rem'
+    margin: '.2rem auto'
   },
   media: {
-    height: 300
+    height: 400
   },
   paper: {
-    maxWidth: '800px',
     padding: '2rem',
     margin: '2rem auto'
   }

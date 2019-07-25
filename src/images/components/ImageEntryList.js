@@ -18,6 +18,8 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 
+import DeleteForever from '@material-ui/icons/DeleteForever'
+
 const styles = {
   card: {
     maxWidth: '80%'
@@ -36,6 +38,8 @@ const styles = {
     maxWidth: '800px',
     padding: '2rem',
     margin: '2rem auto'
+  },
+  floatRight: {
   }
 }
 
@@ -50,7 +54,7 @@ class ImageEntries extends Component {
   }
 
   componentDidMount () {
-    const { user, snackBar } = this.props
+    const { user, enqueueSnackbar } = this.props
 
     indexImageEntries(user)
       .then((response) => {
@@ -66,7 +70,7 @@ class ImageEntries extends Component {
       }
       )
       .catch(() => {
-        snackBar(messages.showImageEntriesFailure, { variant: 'warning' })
+        enqueueSnackbar(messages.showImageEntriesFailure, { variant: 'error' })
       })
   }
 
@@ -183,17 +187,22 @@ class ImageEntries extends Component {
                     </CardContent>
                   </CardActionArea>
                   <CardActions>
-                    <a href={image.fullUrl} target="_blank" rel="noopener noreferrer">
-                      <Button size="small" color="primary">
-                        Full Size
+                    <div style={{ flex: 1, flexDirection: 'row' }}>
+                      <span style={{ flex: 1 }}>
+                        <a href={image.fullUrl} target="_blank" rel="noopener noreferrer">
+                          <Button size="small" color="primary">
+                            Full Size
+                          </Button>
+                        </a>
+                        <Button component={Link} to={'/images/' + image._id} size="small" color="primary">
+                          View Info
+                        </Button>
+                      </span>
+                      <span className="float-right"><Button onClick={this.handleDelete} value={image._id}>
+                        <DeleteForever color="secondary" />
                       </Button>
-                    </a>
-                    <Button component={Link} to={'/images/' + image._id} size="small" color="primary">
-                      View Info
-                    </Button>
-                    <Button onClick={this.handleDelete} value={image._id}>
-                      Delete
-                    </Button>
+                      </span>
+                    </div>
                   </CardActions>
                 </Card>
               </Grid>

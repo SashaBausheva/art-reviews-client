@@ -17,7 +17,8 @@ import ExitToApp from '@material-ui/icons/ExitToApp'
 import Home from '@material-ui/icons/Home'
 import Input from '@material-ui/icons/Input'
 import Lock from '@material-ui/icons/Lock'
-import RateReview from '@material-ui/icons/RateReview'
+import ImageSearch from '@material-ui/icons/ImageSearch'
+import Collections from '@material-ui/icons/Collections'
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser'
 
 const styles = {
@@ -56,7 +57,7 @@ class Header extends Component {
       <div style={styles.list}>
         <div className="side-nav-title">
           <Typography variant="h6" style={styles.title}>
-            Uber, but for goddamn Taxis
+            Picture It
           </Typography>
         </div>
         <Divider />
@@ -69,13 +70,13 @@ class Header extends Component {
           </ListItem>
           <ListItem button component={Link} to="/images">
             <ListItemIcon>
-              <RateReview />
+              <Collections />
             </ListItemIcon>
             <ListItemText primary="My Collection" />
           </ListItem>
           <ListItem button component={Link} to="/image-search">
             <ListItemIcon>
-              <RateReview />
+              <ImageSearch />
             </ListItemIcon>
             <ListItemText primary="Search Images" />
           </ListItem>
@@ -114,7 +115,7 @@ class Header extends Component {
       <div style={styles.list}>
         <div className="side-nav-title">
           <Typography variant="h6" style={styles.title}>
-            Uber, but for Taxis
+            Picture It
           </Typography>
         </div>
         <Divider />
@@ -163,7 +164,7 @@ class Header extends Component {
               </div>
             </Drawer>
             <Typography variant="h6" style={styles.title}>
-              Uber, but for Taxis
+              Picture It
             </Typography>
             { this.props.user && <span>Welcome, {this.props.user.email}</span>}
             {/* user ? (

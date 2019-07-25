@@ -11,27 +11,23 @@ import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import ImagesResults from './ImagesResults'
-import LinearProgress from '@material-ui/core/LinearProgress'
 
 const styles = {
   paper: {
-    maxWidth: '100%',
+    maxWidth: '600px',
     padding: '2rem',
     margin: '2rem auto'
   },
   editBtn: {
-    margin: '.4rem'
+    margin: '.2rem'
   }
 }
 
 class SearchImages extends Component {
-  _isMounted = false
-
   constructor () {
     super()
 
     this.state = {
-      isLoading: true,
       query: '',
       empty: false,
       images: [],
@@ -45,14 +41,6 @@ class SearchImages extends Component {
   handleChange = event => this.setState({
     [event.target.name]: event.target.value
   })
-
-  componentDidMount () {
-    this._isMounted = true
-  }
-
-  componentWillUnmount () {
-    this._isMounted = false
-  }
 
   componentWillUpdate (nextProps, nextState) {
     if (nextState.random === true) {
@@ -69,12 +57,10 @@ class SearchImages extends Component {
     event.preventDefault()
     findImages(query, user)
       .then((res) => {
-        if (this._isMounted) {
-          if ((res.data.results).length !== 0) {
-            this.setState({ images: res.data.results, query: '', empty: false, random: false, randomImage: false, searched: true })
-          } else {
-            this.setState({ query: '', empty: true, random: false, randomImage: false, searched: true })
-          }
+        if ((res.data.results).length !== 0) {
+          this.setState({ images: res.data.results, query: '', empty: false, random: false, randomImage: false, searched: true })
+        } else {
+          this.setState({ query: '', empty: true, random: false, randomImage: false, searched: true })
         }
       })
       .catch(() => {
@@ -86,18 +72,19 @@ class SearchImages extends Component {
   randomSearch = event => {
     this.setState({ random: true })
     const { user, enqueueSnackbar } = this.props
+    console.log('event is ', event)
     event.preventDefault()
     findRandomImage(user)
       .then((res) => {
         if (res.data) {
-          if (this._isMounted) {
-            this.setState({ randomImage: res.data, query: '', empty: false, nonRandom: false, images: false, searched: true })
-          } else {
-            this.setState({ query: '', empty: true, nonRandom: false, images: false, searched: true })
-          }
+          this.setState({ randomImage: res.data, query: '', empty: false, nonRandom: false, images: false, searched: true })
+        } else {
+          this.setState({ query: '', empty: true, nonRandom: false, images: false, searched: true })
         }
       })
       .catch(() => {
+        console.error()
+        console.log(this.state)
         this.setState({ query: '' })
         enqueueSnackbar(messages.searchImagesFailure, { variant: 'error' })
       })
@@ -134,18 +121,14 @@ class SearchImages extends Component {
                       value={query}
                       type='text'
                       fullWidth
-                      placeholder='Keyword'
+                      placeholder='Try another keyword?'
                       onChange={this.handleChange} />
-                  </Grid>
-                  <Grid item>
-                    <div className="search-btn-submit">
-                      <Button type="submit" style={ styles.editBtn } onClick={this.submitSearch} variant="contained" color="primary">Search</Button>
-                    </div>
-                  </Grid>
-                  <Grid item>
-                    <div className="search-btn-random">
-                      <Button style={ styles.editBtn } onClick={this.randomSearch} variant="contained" color="primary">Random Image</Button>
-                    </div>
+                    <Grid item>
+                      <div className="search-btn-submit">
+                        <Button style={styles.editBtn} type="submit" onClick={this.submitSearch} value={1} variant="contained" color="primary">Search</Button>
+                      </div>
+                      <Button style={styles.editBtn} onClick={this.randomSearch} variant="contained" color="primary">Random Image</Button>
+                    </Grid>
                   </Grid>
                 </Grid>
               </form>
@@ -154,6 +137,7 @@ class SearchImages extends Component {
         </div>
       )
     } else if (empty) {
+      console.log('if is executed')
       return (
         <div className='search-images-container'>
           <Grid container spacing={3}>
@@ -183,16 +167,12 @@ class SearchImages extends Component {
                       fullWidth
                       placeholder='Try another keyword?'
                       onChange={this.handleChange} />
-                  </Grid>
-                  <Grid item>
-                    <div className="search-btn-submit">
-                      <Button type="submit" style={ styles.editBtn } onClick={this.submitSearch} variant="contained" color="primary">Search</Button>
-                    </div>
-                  </Grid>
-                  <Grid item>
-                    <div className="search-btn-random">
-                      <Button style={ styles.editBtn } onClick={this.randomSearch} variant="contained" color="primary">Random Image</Button>
-                    </div>
+                    <Grid item>
+                      <div className="search-btn-submit">
+                        <Button style={styles.editBtn} type="submit" onClick={this.submitSearch} value={1} variant="contained" color="primary">Search</Button>
+                      </div>
+                      <Button style={styles.editBtn} onClick={this.randomSearch} variant="contained" color="primary">Random Image</Button>
+                    </Grid>
                   </Grid>
                 </Grid>
               </form>
@@ -204,6 +184,8 @@ class SearchImages extends Component {
         </div>
       )
     } else if (randomImage) {
+      console.log('random image if is executed')
+      console.log('random image is ', randomImage)
       return (
         <div>
           <div className='search-images-container'>
@@ -234,16 +216,13 @@ class SearchImages extends Component {
                         fullWidth
                         placeholder='Keyword'
                         onChange={this.handleChange} />
-                    </Grid>
-                    <Grid item>
-                      <div className="search-btn-submit">
-                        <Button type="submit" style={ styles.editBtn } onClick={this.submitSearch} variant="contained" color="primary">Search</Button>
-                      </div>
-                    </Grid>
-                    <Grid item>
-                      <div className="search-btn-random">
-                        <Button style={ styles.editBtn } onClick={this.randomSearch} variant="contained" color="primary">Random Image</Button>
-                      </div>
+                      <Grid item>
+                        <div className="search-btn-submit">
+                          <Button style={styles.editBtn} type="submit" variant="contained" color="primary">Search</Button>
+                        </div>
+                        <Button style={styles.editBtn} onClick={this.randomSearch} variant="contained" color="primary">Random Image</Button>
+
+                      </Grid>
                     </Grid>
                   </Grid>
                 </form>
@@ -265,6 +244,7 @@ class SearchImages extends Component {
         </div>
       )
     } else if (images) {
+      console.log('if 2 is executed')
       return (
         <div>
           <div className='search-images-container'>
@@ -295,16 +275,12 @@ class SearchImages extends Component {
                         fullWidth
                         placeholder='Keyword'
                         onChange={this.handleChange} />
-                    </Grid>
-                    <Grid item>
-                      <div className="search-btn-submit">
-                        <Button type="submit" style={ styles.editBtn } onClick={this.submitSearch} variant="contained" color="primary">Search</Button>
-                      </div>
-                    </Grid>
-                    <Grid item>
-                      <div className="search-btn-random">
-                        <Button style={ styles.editBtn } onClick={this.randomSearch} variant="contained" color="primary">Random Image</Button>
-                      </div>
+                      <Grid item>
+                        <div className="search-btn-submit">
+                          <Button style={styles.editBtn} type="submit" variant="contained" color="primary">Search</Button>
+                        </div>
+                        <Button style={styles.editBtn} onClick={this.randomSearch} variant="contained" color="primary">Random Image</Button>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </form>
@@ -324,13 +300,6 @@ class SearchImages extends Component {
                 id={image.id}
               />)}
           </div>
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          <h3>Loading...</h3>
-          <LinearProgress />
         </div>
       )
     }
