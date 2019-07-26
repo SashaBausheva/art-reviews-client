@@ -44,8 +44,7 @@ class ChangePassword extends Component {
     changePassword(this.state, user)
       .then(() => enqueueSnackbar(messages.changePasswordSuccess, { variant: 'success' }))
       .then(() => history.push('/'))
-      .catch(error => {
-        console.error(error)
+      .catch(() => {
         this.setState({ oldPassword: '', newPassword: '' })
         enqueueSnackbar(messages.changePasswordFailure, { variant: 'error' })
       })

@@ -81,8 +81,8 @@ const ImageEntryForm = (
             <TextField
               style={ styles.textfield }
               variant="outlined"
-              required
               fullWidth
+              required
               id="comments"
               label="Your comments"
               name="comments"

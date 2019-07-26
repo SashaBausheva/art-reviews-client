@@ -12,7 +12,6 @@ import Paper from '@material-ui/core/Paper'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
-import CardActionArea from '@material-ui/core/CardActionArea'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
@@ -64,13 +63,14 @@ class ImageEntries extends Component {
 
     indexImageEntries(user)
       .then((response) => {
-        if (response.data.images.length !== 0) {
+        const myImages = (response.data.images).filter(image => image.editable)
+        if (myImages.length !== 0) {
           this.setState({
-            images: response.data.images
+            images: myImages
           })
         } else {
           this.setState({
-            noImageEntries: response.data.images
+            noImageEntries: true
           })
         }
       }
@@ -84,24 +84,24 @@ class ImageEntries extends Component {
     event.preventDefault()
     const { user, enqueueSnackbar } = this.props
     const id = event.currentTarget.value
-    console.log(event)
     deleteImageEntry(user, id)
       .then(() => this.setState({ deleted: true }))
       .then(() => {
         indexImageEntries(this.props.user)
           .then((response) => {
-            if (response.data.images.length !== 0) {
+            const myImages = (response.data.images).filter(image => image.editable)
+            if (myImages.length !== 0) {
               this.setState({
-                images: response.data.images, deleted: false
+                images: myImages, deleted: false
               })
             } else {
               this.setState({
-                noImageEntries: response.data.images
+                noImageEntries: true
               })
             }
           }
           )
-          .catch(() => console.error)
+          .catch(() => enqueueSnackbar(messages.deleteImageEntrySuccess, { variant: 'success' }))
       })
       .then(() => enqueueSnackbar(messages.deleteImageEntrySuccess, { variant: 'success' }))
       .catch(() => enqueueSnackbar(messages.deleteImageEntryFailure, { variant: 'error' })
@@ -171,37 +171,33 @@ class ImageEntries extends Component {
             <Grid container key={image._id} spacing={3}>
               <Grid item xs={12}>
                 <Card style={styles.card}>
-                  <CardActionArea>
-                    <CardMedia
-                      style={styles.media}
-                      image={image.imageUrl}
-                      title={image.altDescription}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2" style={ styles.altDescription }>
-                        {image.altDescription}
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary" component="p">
-                        By <a href={`${image.userUrl}?utm_source=picture_it&utm_medium=referral`} target="_blank" rel="noopener noreferrer">{image.userName}</a> on Unsplash
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
+                  <CardMedia
+                    style={styles.media}
+                    image={image.imageUrl}
+                    title={image.altDescription}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2" style={ styles.altDescription }>
+                      {image.altDescription}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      By <a href={`${image.userUrl}?utm_source=picture_it&utm_medium=referral`} target="_blank" rel="noopener noreferrer">{image.userName}</a> on Unsplash
+                    </Typography>
+                  </CardContent>
                   <CardActions>
-                    <div style={{ flex: 1, flexDirection: 'row' }}>
-                      <span style={{ flex: 1 }}>
-                        <a href={image.fullUrl} target="_blank" rel="noopener noreferrer">
-                          <Button size="small" color="primary">
-                            Full Size
-                          </Button>
-                        </a>
+                    <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+                      <div>
+                        <Button size="small" color="primary" href={image.fullUrl} target="_blank" rel="noopener noreferrer" download={image.fullUrl}>
+                          Full Size
+                        </Button>
                         <Button component={Link} to={'/images/' + image._id} size="small" color="primary">
                           View Info
                         </Button>
-                      </span>
-                      <span className="float-right"><Button onClick={this.handleDelete} value={image._id}>
+                      </div>
+                      <div><Button onClick={this.handleDelete} value={image._id}>
                         <DeleteForever color="secondary" />
                       </Button>
-                      </span>
+                      </div>
                     </div>
                   </CardActions>
                 </Card>

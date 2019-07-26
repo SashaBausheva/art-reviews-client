@@ -49,11 +49,9 @@ const ImagesResults = ({ id, imageUrl, fullUrl, userUrl, altDescription, userNam
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <a href={fullUrl} target="_blank" rel="noopener noreferrer">
-          <Button size="small" color="primary">
-            Full Size
-          </Button>
-        </a>
+        <Button size="small" color="primary" href={fullUrl} target="_blank" rel="noopener noreferrer">
+          Full Size
+        </Button>
         <Button size="small" color="primary" component={Link} to={{
           pathname: '/create-image-entry-from-search',
           searchResults: {

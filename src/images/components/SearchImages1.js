@@ -72,7 +72,6 @@ class SearchImages extends Component {
   randomSearch = event => {
     this.setState({ random: true })
     const { user, enqueueSnackbar } = this.props
-    console.log('event is ', event)
     event.preventDefault()
     findRandomImage(user)
       .then((res) => {
@@ -83,8 +82,6 @@ class SearchImages extends Component {
         }
       })
       .catch(() => {
-        console.error()
-        console.log(this.state)
         this.setState({ query: '' })
         enqueueSnackbar(messages.searchImagesFailure, { variant: 'error' })
       })
@@ -137,7 +134,6 @@ class SearchImages extends Component {
         </div>
       )
     } else if (empty) {
-      console.log('if is executed')
       return (
         <div className='search-images-container'>
           <Grid container spacing={3}>
@@ -184,8 +180,6 @@ class SearchImages extends Component {
         </div>
       )
     } else if (randomImage) {
-      console.log('random image if is executed')
-      console.log('random image is ', randomImage)
       return (
         <div>
           <div className='search-images-container'>
@@ -244,7 +238,6 @@ class SearchImages extends Component {
         </div>
       )
     } else if (images) {
-      console.log('if 2 is executed')
       return (
         <div>
           <div className='search-images-container'>

@@ -114,40 +114,39 @@ class ImageEntry extends Component {
           <CardContent>
             <div className="image-content" >
               <Typography variant="body2" color="textSecondary" component="p">
-               By <a href={userUrl}>{userName}</a> on Unsplash
+               By <a href={userUrl} target="_blank" rel="noopener noreferrer">{userName}</a> on Unsplash
               </Typography>
               <Typography gutterBottom variant="h5" component="h2" style={styles.altDescription}>
                 {altDescription}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-              Your notes: {comments}
+              Your notes:
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {comments}
               </Typography>
             </div>
-            <div style={{ flex: 1 }}>
-              <CardActions styles={styles.cardActions}>
-                <span style={{ flex: 1 }} className="float-left">
-                  <a href={imageUrl} target="_blank" rel="noopener noreferrer">
-                    <Button size="small" color="primary">
-                    Full Size
-                    </Button>
-                  </a>
-                  <a href={fullUrl} target="_blank" rel="noopener noreferrer">
-                    <Button size="small" color="primary">
-                      High Resolution
-                    </Button>
-                  </a>
-                </span>
-                <span className="float-right">
-                  <Button component={Link} to={this.props.match.url + '/edit'} color="primary" size="small">
-                    Edit <Edit />
-                  </Button>
-                  <Button onClick={this.handleDelete} color="secondary" size="small">
-                  Delete <DeleteForever color="secondary" />
-                  </Button>
-                </span>
-              </CardActions>
-            </div>
           </CardContent>
+          <CardActions>
+            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+              <div>
+                <Button href={imageUrl} size="small" color="primary" target="_blank" rel="noopener noreferrer">
+                Full Size
+                </Button>
+                <Button size="small" color="primary" href={fullUrl} target="_blank" rel="noopener noreferrer">
+                  High Resolution
+                </Button>
+              </div>
+              <span>
+                <Button component={Link} to={this.props.match.url + '/edit'} color="primary" size="small">
+                  Edit <Edit />
+                </Button>
+                <Button onClick={this.handleDelete} color="secondary" size="small">
+                Delete <DeleteForever color="secondary" />
+                </Button>
+              </span>
+            </div>
+          </CardActions>
         </Card>
       </Fragment>
     )

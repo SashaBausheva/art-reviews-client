@@ -73,10 +73,8 @@ class EditImageEntry extends Component {
 
     render () {
       const { image, edited } = this.state
-      console.log(image)
 
       if (edited) {
-        console.log(edited)
         return <Redirect to={{
           pathname: `/images/${this.props.match.params.id}`
         }} />

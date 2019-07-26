@@ -49,13 +49,11 @@ class CreateImageEntryFromSearch extends Component {
       event.preventDefault()
       const { user, enqueueSnackbar } = this.props
       const { image } = this.state
-      // console.log('on handlesumbit image is ', image)
       createImageEntry(user, image)
         .then(response => this.setState({
           created: true,
           image: response.data.image
         }))
-        .then(() => console.log('after created image is', this.state.image))
         .then(() => enqueueSnackbar(messages.createImageEntrySuccess, { variant: 'success' }))
         .catch(() => {
           this.setState({
@@ -77,7 +75,6 @@ class CreateImageEntryFromSearch extends Component {
 
       const { imageUrlPlaceholder, altDescriptionPlaceholder, userNamePlaceholder, id, userUrl, fullUrl } = this.props.location.searchResults
       const { imageUrl, altDescription, userName, comments } = image
-      console.log('this is image fullUrl is ', image.fullUrl)
       return (
         <Fragment>
           <SearchedImageEntryForm
