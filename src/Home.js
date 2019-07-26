@@ -10,7 +10,7 @@ const authenticatedHome = (
   <React.Fragment>
     <div>
       <h3 style={styles.h3}>Welcome.</h3>
-      <img src="http://giphygifs.s3.amazonaws.com/media/PZYSUDk0ajJnO/giphy.gif" />
+      <img src="/public/images/dead_inside.gif" />
     </div>
   </React.Fragment>
 )
@@ -19,7 +19,7 @@ const unauthenticatedHome = (
   <React.Fragment>
     <div>
       <h3 style={styles.h3}>The last <s>3 months</s> 4 days:</h3>
-      <img src="https://media.giphy.com/media/14akZTBhO7rW00/giphy.gif" />
+      <img src="/public/what_to_do.gif" />
     </div>
   </React.Fragment>
 )
