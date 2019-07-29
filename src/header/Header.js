@@ -27,7 +27,8 @@ const styles = {
   },
   menuButton: {
     marginRight: '1rem',
-    color: 'white'
+    color: 'white',
+    outline: 'none'
   },
   title: {
     flexGrow: 1

@@ -78,7 +78,7 @@ class SignIn extends Component {
                   style={{ width: '100%', marginBotton: '1rem' }}
                   onChange={this.handleChange}
                 />
-                <Button type='submit' variant="contained" color="primary">
+                <Button type='submit' variant="contained" color="primary" style={{ outline: 'none' }}>
                         Sign In
                 </Button>
               </form>

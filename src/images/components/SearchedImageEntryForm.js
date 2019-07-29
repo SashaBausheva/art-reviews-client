@@ -8,12 +8,13 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Paper from '@material-ui/core/Paper'
 
 const styles = {
+  buttons: {
+    margin: '1rem .2rem 0 .2rem',
+    outline: 'none'
+  },
   div: {
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  editBtn: {
-    margin: '.2rem'
   },
   paper: {
     maxWidth: '800px',
@@ -28,9 +29,10 @@ const styles = {
 const SearchedImageEntryForm = (
   { id, imageUrl, fullUrl, userUrl, altDescription, userName, comments, handleSubmit, handleChange }) => (
   <div className="image-form-container">
-    <Paper>
+    <Paper style={ styles.paper }>
       <CssBaseline />
       <div className="image-form">
+        <h1>Image Form Title Here</h1>
         <form className="form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -96,14 +98,14 @@ const SearchedImageEntryForm = (
             justify="center"
             alignItems="center"
           >
-            <Grid item xs={10} sm={5}>
+            <Grid item>
               <div className="create-btn-submit">
-                <Button type="submit" variant="contained" color="primary" fullWidth>Submit</Button>
+                <Button type="submit" variant="contained" color="primary" style={ styles.buttons }>Submit</Button>
               </div>
             </Grid>
-            <Grid item xs={10} sm={5}>
+            <Grid item>
               <div className="create-btn-submit">
-                <Button component={Link} to="/image-search" variant="contained" color="secondary" fullWidth>Cancel</Button>
+                <Button component={Link} to="/image-search" variant="contained" color="secondary" style={ styles.buttons }>Cancel</Button>
               </div>
             </Grid>
           </Grid>

@@ -2,7 +2,8 @@ import React from 'react'
 
 const styles = {
   h3: {
-    margin: '3rem auto'
+    margin: '3rem auto',
+    backgroundColor: 'red'
   }
 }
 

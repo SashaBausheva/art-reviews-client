@@ -22,9 +22,6 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center'
   },
-  editBtn: {
-    margin: '.2rem auto'
-  },
   media: {
     height: 400
   }

@@ -83,7 +83,7 @@ class ChangePassword extends Component {
                   style={{ width: '100%', marginBotton: '1rem' }}
                   onChange={this.handleChange}
                 />
-                <Button type='submit' style={{ marginTop: '1rem' }} variant="contained" color="primary">Change Password</Button>
+                <Button type='submit' style={{ marginTop: '1rem', outline: 'none' }} variant="contained" color="primary">Change Password</Button>
               </form>
             </Paper>
           </Grid>
