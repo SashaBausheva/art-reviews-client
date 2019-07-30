@@ -37,12 +37,12 @@ class App extends Component {
     return (
       <SnackbarProvider maxSnack={3} autoHideDuration={2000}>
         <Header user={user} />
+        <Route exact path='/' render={() => (
+          <Home alert={this.alert} user={user} />
+        )} />
         <main className="container">
           <Route path='/sign-up' render={() => (
             <SignUp alert={this.alert} setUser={this.setUser} />
-          )} />
-          <Route exact path='/' render={() => (
-            <Home alert={this.alert} user={user} />
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn alert={this.alert} setUser={this.setUser} />
