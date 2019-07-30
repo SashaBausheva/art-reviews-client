@@ -145,7 +145,7 @@ class Header extends Component {
 
     return (
       <div style={styles.root}>
-        <AppBar position="absolute" style={{ opacity: '.8' }}>
+        <AppBar position="absolute" style={{ opacity: '.8', boxShadow: 'none' }}>
           <Toolbar>
             <IconButton
               edge="start"

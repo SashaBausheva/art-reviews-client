@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import { indexImageEntries } from './images/api'
+import { Link } from 'react-router-dom'
+import ChevronRight from '@material-ui/icons/ChevronRight'
 
 const styles = {
   h3: {
     margin: '3rem auto',
     backgroundColor: 'red'
+  },
+  imageTitle: {
+    textTransform: 'capitalize'
   }
 }
 
@@ -62,6 +67,7 @@ class Home extends Component {
     if (user && images) {
       console.log('first if statement is running')
       console.log('is loading? ', isLoading)
+      console.log('is it mounted? ', this._isMounted)
       if (this._isMounted) {
         console.log(images)
         return (
@@ -73,9 +79,14 @@ class Home extends Component {
                   src={image.fullUrl}
                   alt="First slide"
                 />
+                <div>
+                  <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '70%', width: '100%', background: 'rgba(255, 255, 255, .6)', padding: '1.5rem 0' }}>
+                    <Link to={`images/${image._id}`} style={{ color: 'white', textDecoration: 'none' }}>See this in your collection <ChevronRight /></Link>
+                  </h4>
+                </div>
                 <Carousel.Caption>
-                  <h3>{image.altDescription}</h3>
-                  By <a href={`${image.userUrl}?utm_source=picture_it&utm_medium=referral`} target="_blank" rel="noopener noreferrer">{image.userName}</a> on Unsplash
+                  <h3 style={ styles.imageTitle }>{image.altDescription}</h3>
+                  By <a href={`${image.userUrl}?utm_source=picture_it&utm_medium=referral`} style={{ color: 'white', textDecoration: 'underline' }} target="_blank" rel="noopener noreferrer">{image.userName}</a> on Unsplash
                 </Carousel.Caption>
               </Carousel.Item>
             ))}
