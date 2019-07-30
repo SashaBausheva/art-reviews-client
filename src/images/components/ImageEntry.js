@@ -25,10 +25,13 @@ const styles = {
     margin: '.5rem auto'
   },
   backButton: {
-    position: 'absolute'
-  },
-  backButtonIcon: {
-    margin: '0 auto'
+    margin: 0,
+    bottom: 'auto',
+    left: 20,
+    top: 80,
+    right: 'auto',
+    position: 'fixed',
+    outline: 'none'
   },
   card: {
     maxWidth: '70%',
@@ -103,7 +106,7 @@ class ImageEntry extends Component {
     return (
       <Fragment>
         <Fab color="primary" aria-label="add" style={styles.backButton} component={Link} to="/images" >
-          <ArrowBackIos style={styles.backBuittonIcon}/>
+          <ArrowBackIos/>
         </Fab>
         <Card style={styles.card}>
           <CardMedia

@@ -1,8 +1,6 @@
 import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 
-// import '../../../css/reviews/ReviewForm.scss'
-
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid'
@@ -14,7 +12,8 @@ const styles = {
     justifyContent: 'center'
   },
   editBtn: {
-    margin: '.2rem'
+    margin: '.2rem',
+    outline: 'none'
   },
   paper: {
     maxWidth: '800px',

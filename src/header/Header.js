@@ -27,7 +27,8 @@ const styles = {
   },
   menuButton: {
     marginRight: '1rem',
-    color: 'white'
+    color: 'white',
+    outline: 'none'
   },
   title: {
     flexGrow: 1
@@ -144,7 +145,7 @@ class Header extends Component {
 
     return (
       <div style={styles.root}>
-        <AppBar position="static">
+        <AppBar position="absolute" style={{ opacity: '.8', boxShadow: 'none' }}>
           <Toolbar>
             <IconButton
               edge="start"

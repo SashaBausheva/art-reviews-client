@@ -13,6 +13,9 @@ const styles = {
     maxWidth: '600px',
     padding: '2rem',
     margin: '2rem auto'
+  },
+  pageTop: {
+    marginTop: '5.5rem'
   }
 }
 
@@ -51,7 +54,7 @@ class SignIn extends Component {
     return (
       <div>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={styles.pageTop}>
             <Paper style={ styles.paper }>
               <form onSubmit={this.onSignIn}>
                 <h3>Sign In</h3>
@@ -78,7 +81,7 @@ class SignIn extends Component {
                   style={{ width: '100%', marginBotton: '1rem' }}
                   onChange={this.handleChange}
                 />
-                <Button type='submit' variant="contained" color="primary">
+                <Button type='submit' variant="contained" color="primary" style={{ outline: 'none' }}>
                         Sign In
                 </Button>
               </form>

@@ -18,33 +18,50 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 
 import DeleteForever from '@material-ui/icons/DeleteForever'
+import Fab from '@material-ui/core/Fab'
 
 const styles = {
+  addImage: {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed'
+  },
   altDescription: {
     textTransform: 'capitalize',
     marginTop: '.2rem',
     marginBottom: '.5rem'
   },
+  buttons: {
+    margin: '.2rem'
+  },
   card: {
     maxWidth: '80%',
-    margin: '2rem auto'
+    margin: '1rem auto'
   },
   div: {
     alignItems: 'center',
     justifyContent: 'center'
   },
-  editBtn: {
-    margin: '.2rem'
+  h1: {
+    marginTop: '5.5rem',
+    textAlign: 'center',
+    alignSelf: 'center'
+  },
+  loading: {
+    display: 'inline-block',
+    position: 'relative',
+    margin: '40vh auto'
   },
   media: {
-    height: 300
+    height: 400
   },
   paper: {
     maxWidth: '800px',
     padding: '2rem',
-    margin: '2rem auto'
-  },
-  floatRight: {
+    margin: '1rem auto'
   }
 }
 
@@ -120,7 +137,7 @@ class ImageEntries extends Component {
                 <CssBaseline />
                 <div className="empty-results">
                   <h3>No images</h3>
-                  <Button style={ styles.editBtn } component={Link} to="/image-search" variant="contained" color="primary">
+                  <Button style={ styles.buttons } component={Link} to="/image-search" variant="contained" color="primary">
                     Find Images
                     <AddIcon />
                   </Button>
@@ -134,7 +151,7 @@ class ImageEntries extends Component {
       return (
         <div className="empty-results-container">
           <Grid container>
-            <Grid item xs={12}>
+            <Grid item xs={6} style={styles.loading}>
               <Paper style={ styles.paper }>
                 <CssBaseline />
                 <div className="empty-results">
@@ -149,22 +166,29 @@ class ImageEntries extends Component {
     }
     return (
       <Fragment>
+        <Fab color="secondary" aria-label="Add" style={styles.addImage} component={Link} to="/image-search">
+          <AddIcon />
+        </Fab>
         <div>
-          <h1 className="my-images-header">Your Image Entries</h1>
           <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <h1 className="my-images-header" style={styles.h1}>Your Collection</h1>
+            </Grid>
+          </Grid>
+          {/* <Grid container spacing={3}>
             <Grid item>
               <div className="image-btn-submit">
-                <Button component={Link} style={styles.editBtn} to="/image-search" color="secondary" variant="contained" fullWidth>
+                <Button component={Link} style={styles.buttons} to="/image-search" color="secondary" variant="contained" fullWidth>
                   Find More Images <AddIcon />
                 </Button>
               </div>
             </Grid>
-            {/* <Grid item xs={12} sm={5}>
+            <Grid item xs={12} sm={5}>
               <div className="review-btn-submit">
                 <Button component={Link} to="/search-artist" variant="contained" color="primary" fullWidth>Find Artist</Button>
               </div>
-            </Grid> */}
-          </Grid>
+            </Grid>
+          </Grid> */}
         </div>
         <div>
           {this.state.images.map(image => (
@@ -177,11 +201,17 @@ class ImageEntries extends Component {
                     title={image.altDescription}
                   />
                   <CardContent>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      By <a href={`${image.userUrl}?utm_source=picture_it&utm_medium=referral`} target="_blank" rel="noopener noreferrer">{image.userName}</a> on Unsplash
+                    </Typography>
                     <Typography gutterBottom variant="h5" component="h2" style={ styles.altDescription }>
                       {image.altDescription}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                      By <a href={`${image.userUrl}?utm_source=picture_it&utm_medium=referral`} target="_blank" rel="noopener noreferrer">{image.userName}</a> on Unsplash
+                    Your notes:
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                      {image.comments}
                     </Typography>
                   </CardContent>
                   <CardActions>
