@@ -13,6 +13,9 @@ const styles = {
     maxWidth: '600px',
     padding: '2rem',
     margin: '2rem auto'
+  },
+  pageTop: {
+    marginTop: '5.5rem'
   }
 }
 
@@ -52,7 +55,7 @@ class SignUp extends Component {
 
     return (
       <div>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} style={styles.pageTop}>
           <Grid item xs={12}>
             <Paper style={ styles.paper }>
               <form className='auth-form' onSubmit={this.onSignUp}>

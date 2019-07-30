@@ -39,16 +39,21 @@ const styles = {
   },
   card: {
     maxWidth: '80%',
-    margin: '1.5rem auto'
+    margin: '1rem auto'
   },
   div: {
     alignItems: 'center',
     justifyContent: 'center'
   },
   h1: {
-    marginTop: '1.5rem',
+    marginTop: '5.5rem',
     textAlign: 'center',
     alignSelf: 'center'
+  },
+  loading: {
+    display: 'inline-block',
+    position: 'relative',
+    margin: '40vh auto'
   },
   media: {
     height: 400
@@ -146,7 +151,7 @@ class ImageEntries extends Component {
       return (
         <div className="empty-results-container">
           <Grid container>
-            <Grid item xs={12}>
+            <Grid item xs={6} style={styles.loading}>
               <Paper style={ styles.paper }>
                 <CssBaseline />
                 <div className="empty-results">

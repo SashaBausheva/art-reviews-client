@@ -18,6 +18,15 @@ const styles = {
     margin: '1rem .2rem 0 .2rem',
     outline: 'none'
   },
+  h1: {
+    marginTop: '5.5rem',
+    textAlign: 'center',
+    alignSelf: 'center'
+  },
+  noResults: {
+    textAlign: 'center',
+    alignSelf: 'center'
+  },
   paper: {
     maxWidth: '80%',
     padding: '2rem',
@@ -113,7 +122,7 @@ class SearchImages extends Component {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <div className="image-search-header">
-                <h1>What would you like to find today?</h1>
+                <h1 style={styles.h1}>What would you like to find today?</h1>
               </div>
             </Grid>
           </Grid>
@@ -160,7 +169,7 @@ class SearchImages extends Component {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <div className="image-search-header">
-                <h1>What would you like to find today?</h1>
+                <h1 style={styles.h1}>What would you like to find today?</h1>
               </div>
             </Grid>
           </Grid>
@@ -200,7 +209,7 @@ class SearchImages extends Component {
             </div>
           </Paper>
           <div className="empty-search-results">
-            <h4>We were unable to find anything for that keyword.</h4>
+            <h4 style={styles.noResults}>We were unable to find anything for that keyword.</h4>
           </div>
         </div>
       )
@@ -211,7 +220,7 @@ class SearchImages extends Component {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <div className="image-search-header">
-                  <h1>What would you like to find today?</h1>
+                  <h1 style={styles.h1}>What would you like to find today?</h1>
                 </div>
               </Grid>
             </Grid>
@@ -272,7 +281,7 @@ class SearchImages extends Component {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <div className="image-search-header">
-                  <h1>What would you like to find today?</h1>
+                  <h1 style={styles.h1}>What would you like to find today?</h1>
                 </div>
               </Grid>
             </Grid>
