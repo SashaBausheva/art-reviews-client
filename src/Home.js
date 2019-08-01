@@ -71,7 +71,7 @@ class Home extends Component {
       findRandomImages()
         .then(
           (response) => {
-            console.log(response.data.images)
+            console.log(response)
             this.setState({ images: response.data.images })
             console.log('random images response', response)
           })
