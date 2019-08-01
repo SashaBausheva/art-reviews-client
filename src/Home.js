@@ -71,6 +71,7 @@ class Home extends Component {
       findRandomImages()
         .then(
           (response) => {
+            console.log(response.data.images)
             this.setState({ images: response.data.images })
             console.log('random images response', response)
           })
@@ -81,7 +82,7 @@ class Home extends Component {
   }
 
   render () {
-    console.log('render')
+    console.log('rendering images ', this.state.images)
     if ((this.state.images).length === 0) {
       return (
         <div className="empty-results-container">
