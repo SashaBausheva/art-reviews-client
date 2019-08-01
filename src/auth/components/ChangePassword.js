@@ -54,7 +54,8 @@ class ChangePassword extends Component {
     const { oldPassword, newPassword } = this.state
 
     return (
-      <div>
+      <div
+      >
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper style={ styles.paper }>

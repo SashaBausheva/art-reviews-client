@@ -19,7 +19,6 @@ const styles = {
     outline: 'none'
   },
   h1: {
-    marginTop: '5.5rem',
     textAlign: 'center',
     alignSelf: 'center'
   },
@@ -79,15 +78,18 @@ class SearchImages extends Component {
     event.preventDefault()
     findImages(query, user)
       .then((res) => {
+        console.log('then is running now')
+        console.log('res data is ', res.data.images)
         if (this._isMounted) {
-          if ((res.data.results).length !== 0) {
-            this.setState({ images: res.data.results, query: '', empty: false, random: false, randomImage: false, searched: true })
+          if ((res.data.images.results).length !== 0) {
+            this.setState({ images: res.data.images.results, query: '', empty: false, random: false, randomImage: false, searched: true })
           } else {
             this.setState({ query: '', empty: true, random: false, randomImage: false, searched: true })
           }
         }
       })
       .catch(() => {
+        console.log('error is running now')
         this.setState({ query: '' })
         enqueueSnackbar(messages.searchImagesFailure, { variant: 'error' })
       })
@@ -100,8 +102,9 @@ class SearchImages extends Component {
     findRandomImage(user)
       .then((res) => {
         if (res.data) {
+          console.log('random image res data', res.data)
           if (this._isMounted) {
-            this.setState({ randomImage: res.data, query: '', empty: false, nonRandom: false, images: false, searched: true })
+            this.setState({ randomImage: res.data.image, query: '', empty: false, nonRandom: false, images: false, searched: true })
           } else {
             this.setState({ query: '', empty: true, nonRandom: false, images: false, searched: true })
           }
@@ -338,9 +341,18 @@ class SearchImages extends Component {
       )
     } else {
       return (
-        <div>
-          <h3>Loading...</h3>
-          <LinearProgress />
+        <div className="empty-results-container">
+          <Grid container>
+            <Grid item xs={6} style={styles.loading}>
+              <Paper style={ styles.paper }>
+                <CssBaseline />
+                <div className="empty-results">
+                  <h3>Loading...</h3>
+                  <LinearProgress />
+                </div>
+              </Paper>
+            </Grid>
+          </Grid>
         </div>
       )
     }

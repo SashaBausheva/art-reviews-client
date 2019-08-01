@@ -38,15 +38,16 @@ const styles = {
     margin: '.2rem'
   },
   card: {
-    maxWidth: '80%',
-    margin: '1rem auto'
+    height: '100%',
+    display: 'grid',
+    gridTemplateRows: 'max-content 4fr 1fr'
+    // margin: '1rem auto'
   },
   div: {
     alignItems: 'center',
     justifyContent: 'center'
   },
   h1: {
-    marginTop: '5.5rem',
     textAlign: 'center',
     alignSelf: 'center'
   },
@@ -56,12 +57,15 @@ const styles = {
     margin: '40vh auto'
   },
   media: {
-    height: 400
+    height: '40vh'
   },
   paper: {
-    maxWidth: '800px',
     padding: '2rem',
-    margin: '1rem auto'
+    height: '100%'
+    // margin: '1rem auto'
+  },
+  root: {
+    flexGrow: 1
   }
 }
 
@@ -191,49 +195,51 @@ class ImageEntries extends Component {
           </Grid> */}
         </div>
         <div>
-          {this.state.images.map(image => (
-            <Grid container key={image._id} spacing={3}>
-              <Grid item xs={12}>
-                <Card style={styles.card}>
-                  <CardMedia
-                    style={styles.media}
-                    image={image.imageUrl}
-                    title={image.altDescription}
-                  />
-                  <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      By <a href={`${image.userUrl}?utm_source=picture_it&utm_medium=referral`} target="_blank" rel="noopener noreferrer">{image.userName}</a> on Unsplash
-                    </Typography>
-                    <Typography gutterBottom variant="h5" component="h2" style={ styles.altDescription }>
-                      {image.altDescription}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    Your notes:
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      {image.comments}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
-                      <div>
-                        <Button size="small" color="primary" href={image.fullUrl} target="_blank" rel="noopener noreferrer" download={image.fullUrl}>
-                          Full Size
+          <div style={ styles.root }>
+            <Grid container spacing={3}>
+              {this.state.images.map(image => (
+                <Grid item xs={4} key={image._id}>
+                  <Card style={styles.card}>
+                    <CardMedia
+                      style={styles.media}
+                      image={image.imageUrl}
+                      title={image.altDescription}
+                    />
+                    <CardContent>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        By <a href={`${image.userUrl}?utm_source=picture_it&utm_medium=referral`} target="_blank" rel="noopener noreferrer">{image.userName}</a> on Unsplash
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="h2" style={ styles.altDescription }>
+                        {image.altDescription}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                      Your notes:
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        {image.comments}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+                        <div>
+                          <Button size="small" color="primary" href={image.fullUrl} target="_blank" rel="noopener noreferrer" download={image.fullUrl}>
+                            Full Size
+                          </Button>
+                          <Button component={Link} to={'/images/' + image._id} size="small" color="primary">
+                            View Info
+                          </Button>
+                        </div>
+                        <div><Button onClick={this.handleDelete} value={image._id}>
+                          <DeleteForever color="secondary" />
                         </Button>
-                        <Button component={Link} to={'/images/' + image._id} size="small" color="primary">
-                          View Info
-                        </Button>
+                        </div>
                       </div>
-                      <div><Button onClick={this.handleDelete} value={image._id}>
-                        <DeleteForever color="secondary" />
-                      </Button>
-                      </div>
-                    </div>
-                  </CardActions>
-                </Card>
-              </Grid>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
             </Grid>
-          ))}
+          </div>
         </div>
       </Fragment>
     )

@@ -13,6 +13,9 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardActions from '@material-ui/core/CardActions'
 import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Grid from '@material-ui/core/Grid'
 
 import Fab from '@material-ui/core/Fab'
 import DeleteForever from '@material-ui/icons/DeleteForever'
@@ -43,6 +46,11 @@ const styles = {
   },
   editBtn: {
     margin: '.2rem auto'
+  },
+  loading: {
+    display: 'inline-block',
+    position: 'relative',
+    margin: '40vh auto'
   },
   media: {
     height: 400
@@ -88,9 +96,18 @@ class ImageEntry extends Component {
   render () {
     if (!this.state.image) {
       return (
-        <div>
-          <h3>Loading...</h3>
-          <LinearProgress />
+        <div className="empty-results-container">
+          <Grid container>
+            <Grid item xs={6} style={styles.loading}>
+              <Paper style={ styles.paper }>
+                <CssBaseline />
+                <div className="empty-results">
+                  <h3>Loading...</h3>
+                  <LinearProgress />
+                </div>
+              </Paper>
+            </Grid>
+          </Grid>
         </div>
       )
     }
