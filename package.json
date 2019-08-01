@@ -1,6 +1,6 @@
 {
-  "name": "art-reviews-client",
-  "homepage": "https://sashabausheva.github.io/art-reviews-client",
+  "name": "picture-it-client",
+  "homepage": "https://sashabausheva.github.io/picture-it-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -2,16 +2,13 @@ import React from 'react'
 
 const styles = {
   h3: {
-    margin: '3rem auto',
-    backgroundColor: 'red'
   }
 }
 
 const authenticatedHome = (
   <React.Fragment>
     <div>
-      <h3 style={styles.h3}>Welcome.</h3>
-      <img src="./dead_inside.gif" />
+      <h3 style={styles.h3}>Substitute Home component (signed in)</h3>
     </div>
   </React.Fragment>
 )
@@ -19,8 +16,7 @@ const authenticatedHome = (
 const unauthenticatedHome = (
   <React.Fragment>
     <div>
-      <h3 style={styles.h3}>The last <s>3 months</s> 4 days:</h3>
-      <img src="./what_to_do.gif" />
+      <h3 style={styles.h3}>Substitute Home component (not signed in)</h3>
     </div>
   </React.Fragment>
 )

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './css/index.scss'
 import Carousel from 'react-bootstrap/Carousel'
 import { indexImageEntries, findRandomImages } from './images/api'
 import { Link } from 'react-router-dom'
@@ -13,7 +14,16 @@ const styles = {
     margin: '3rem auto'
   },
   imageTitle: {
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
+    textShadowColor: 'black',
+    textShadowOffset:
+      { width: '0px', height: '0px' },
+    textShadowRadius: 10
+  },
+  images: {
+    objectFit: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh'
   },
   loading: {
     display: 'inline-block',
@@ -28,20 +38,15 @@ const styles = {
 }
 
 class Home extends Component {
-  _isMounted = false
-
-  constructor () {
-    super()
-
+  constructor (props) {
+    super(props)
     this.state = {
       isLoading: true,
-      images: [],
-      deleted: false
+      images: []
     }
   }
 
   componentDidMount () {
-    this._isMounted = true
     const { user } = this.props
 
     if (user) {
@@ -66,123 +71,64 @@ class Home extends Component {
       findRandomImages()
         .then(
           (response) => {
-            this.setState({ images: response.data })
-            console.log(this.images)
+            this.setState({ images: response.data.images })
+            console.log('random images response', response)
           })
         .catch(() => {
-          console.log('error')
+          console.log('error on findRandomImages in Home.js')
         })
     }
   }
 
-  componentWillUnmount () {
-    this._isMounted = false
-  }
-
   render () {
-    const { user } = this.props
-    const { images, noImageEntries, isLoading } = this.state
-    console.log('rendering start')
-    console.log('this props is ', this.props)
-    console.log('this state is ', this.state)
-    console.log('is mounted? ', this._isMounted)
-
-    if (user && images) {
-      console.log('first if statement is running')
-      console.log('is loading? ', isLoading)
-      console.log('is it mounted? ', this._isMounted)
-      if (this._isMounted) {
-        console.log(images)
-        return (
-          <Carousel interval={5000} style={{ height: '100vh' }}>
-            {images.map(image => (
-              <Carousel.Item key={image._id}>
-                <img style={{ objectFit: 'cover', objectPosition: 'center', height: '100vh' }}
-                  className="w-100"
-                  src={image.fullUrl}
-                  alt="First slide"
-                />
-                <div>
-                  <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '70%', width: '100%', background: 'rgba(255, 255, 255, .6)', padding: '1.5rem 0' }}>
-                    <Link to={`images/${image._id}`} style={{ color: 'white', textDecoration: 'none' }}>See this in your collection <ChevronRight /></Link>
-                  </h4>
-                </div>
-                <Carousel.Caption>
-                  <h3 style={ styles.imageTitle }>{image.altDescription}</h3>
-                  By <a href={`${image.userUrl}?utm_source=picture_it&utm_medium=referral`} style={{ color: 'white', textDecoration: 'underline' }} target="_blank" rel="noopener noreferrer">{image.userName}</a> on Unsplash
-                </Carousel.Caption>
-              </Carousel.Item>
-            ))}
-          </Carousel>
-        )
-      } else {
-        return (
-          <div className="empty-results-container">
-            <Grid container>
-              <Grid item xs={6} style={styles.loading}>
-                <Paper style={ styles.paper }>
-                  <CssBaseline />
-                  <div className="empty-results">
-                    <h3>Loading...</h3>
-                    <LinearProgress />
-                  </div>
-                </Paper>
-              </Grid>
-            </Grid>
-          </div>
-        )
-      }
-    } else if (user && noImageEntries) {
+    console.log('render')
+    if ((this.state.images).length === 0) {
       return (
-        <React.Fragment>
-          <div>
-            <h3 style={styles.h3}>No image entries</h3>
-          </div>
-        </React.Fragment>
-      )
-    } else {
-      if (this._isMounted) {
-        console.log('images under isMounted is ', images)
-        return (
-          <Carousel interval={5000} style={{ height: '100vh' }}>
-            {images.map(image => (
-              <Carousel.Item key={image.id}>
-                <img style={{ objectFit: 'cover', objectPosition: 'center', height: '100vh' }}
-                  className="w-100"
-                  src={image.urls.full}
-                  alt="First slide"
-                />
-                <div>
-                  <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '70%', width: '100%', background: 'rgba(255, 255, 255, .6)', padding: '1.5rem 0' }}>
-                    <Link to={'/sign-in'} style={{ color: 'white', textDecoration: 'none' }}>Sign in to start collecting<ChevronRight /></Link>
-                  </h4>
+        <div className="empty-results-container">
+          <Grid container>
+            <Grid item xs={6} style={styles.loading}>
+              <Paper style={ styles.paper }>
+                <CssBaseline />
+                <div className="empty-results">
+                  <h3>Loading...</h3>
+                  <LinearProgress />
                 </div>
-                <Carousel.Caption>
-                  <h3 style={ styles.imageTitle }>{image.altDescription}</h3>
-                  By <a href={`${image.user.links.self}?utm_source=picture_it&utm_medium=referral`} style={{ color: 'white', textDecoration: 'underline' }} target="_blank" rel="noopener noreferrer">{image.user.name}</a> on Unsplash
-                </Carousel.Caption>
-              </Carousel.Item>
-            ))}
-          </Carousel>
-        )
-      } else {
-        return (
-          <div className="empty-results-container">
-            <Grid container>
-              <Grid item xs={6} style={styles.loading}>
-                <Paper style={ styles.paper }>
-                  <CssBaseline />
-                  <div className="empty-results">
-                    <h3>Loading...</h3>
-                    <LinearProgress />
-                  </div>
-                </Paper>
-              </Grid>
+              </Paper>
             </Grid>
-          </div>
-        )
-      }
+          </Grid>
+        </div>
+      )
     }
+
+    return (
+
+      <Carousel interval={5000} style={{ height: '100vh', marginTop: '-100px' }}>
+        {this.state.images.map(image => (
+          <Carousel.Item key={`${this.props.user ? image._id : image.id}`}>
+            <img style={styles.images}
+              className="d-block w-100"
+              src={this.props.user && image.fullUrl ? image.fullUrl : image.urls.full}
+              alt={this.props.user ? image.altDescription : image.alt_description}
+            />
+            { this.props.user ? (
+              <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '70%', width: '100%', background: 'rgba(255, 255, 255, .6)', padding: '1.5rem 0' }}>
+                <Link to={`images/${image._id}`} style={{ color: 'white', textDecoration: 'none' }}>See this in your collection<ChevronRight /></Link>
+              </h4>
+            ) : (
+              <div>
+                <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '70%', width: '100%', background: 'rgba(255, 255, 255, .6)', padding: '1.5rem 0' }}>
+                  <Link to={'/sign-in'} style={{ color: 'white', textDecoration: 'none' }}>Sign in to start collecting<ChevronRight /></Link>
+                </h4>
+              </div>
+            )}
+            <Carousel.Caption>
+              <h3 style={ styles.imageTitle }>{this.props.user ? image.altDescription : image.alt_description}</h3>
+                By <a href={`${this.props.user ? image.userUrl : image.user.links.self}?utm_source=picture_it&utm_medium=referral`} style={{ color: 'white', textDecoration: 'underline' }} target="_blank" rel="noopener noreferrer">{this.props.user ? image.userName : image.user.name}</a> on Unsplash
+            </Carousel.Caption>
+          </Carousel.Item>
+        ))}
+      </Carousel>
+    )
   }
 }
 
