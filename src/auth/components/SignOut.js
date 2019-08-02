@@ -7,12 +7,14 @@ import messages from '../messages'
 
 class SignOut extends Component {
   componentDidMount () {
-    const { enqueueSnackbar, history, clearUser, user } = this.props
+    const { history, clearUser, user, enqueueSnackbar } = this.props
 
     signOut(user)
-      .finally(() => enqueueSnackbar(messages.signOutSuccess, { variant: 'success' }))
-      .finally(() => history.push('/'))
-      .finally(() => clearUser())
+      .finally(() => {
+        clearUser() // clear the user first!
+        enqueueSnackbar(messages.signInSuccess, { variant: 'success' })
+        history.push('/')
+      })
   }
 
   render () {
