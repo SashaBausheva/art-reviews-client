@@ -186,7 +186,7 @@ class Home extends Component {
           ))}
         </Carousel>
         {
-          !this.props.user && <div><Box component="div" display={{ xs: 'none', sm: 'inline' }} style={{ color: 'white', left: 0, position: 'absolute', textAlign: 'center', top: '32vh', width: '100%', background: 'rgba(25, 25, 25, .6)', padding: '1.5rem 0' }}>
+          !this.props.user && <div><Box component="div" display={{ xs: 'none', sm: 'inline' }} style={{ color: 'white', left: 0, position: 'absolute', textAlign: 'center', top: '30vh', width: '100%', background: 'rgba(25, 25, 25, .6)', padding: '1.5rem 0' }}>
             <div style={{ width: '70%', margin: '0 auto' }}><h4>
               Welcome to Picture It – your personal collection of high-resolution photos shared by creaters all around the world.
             </h4>
