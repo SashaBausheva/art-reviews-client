@@ -14,7 +14,7 @@ import ImageEntryList from './images/components/ImageEntryList'
 import EditImageEntry from './images/components/EditImageEntry'
 import SearchImages from './images/components/SearchImages'
 import CreateImageEntryFromSearch from './images/components/CreateImageEntryFromSearch'
-import Home from './Home.js'
+import Home from './Home1.js'
 
 import { SnackbarProvider } from 'notistack'
 

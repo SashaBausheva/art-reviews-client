@@ -16,6 +16,9 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center'
   },
+  h2: {
+    fontFamily: 'Raleway'
+  },
   paper: {
     maxWidth: '800px',
     padding: '2rem',
@@ -32,7 +35,7 @@ const SearchedImageEntryForm = (
     <Paper style={ styles.paper }>
       <CssBaseline />
       <div className="image-form">
-        <h1>Image Form Title Here</h1>
+        <h2 style={styles.h2}>Add to Collection</h2>
         <form className="form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>

@@ -2,7 +2,6 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 export const indexImageEntries = user => {
-  console.log(require('dotenv').config())
   return axios({
     url: apiUrl + '/images',
     method: 'GET',

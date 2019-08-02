@@ -18,9 +18,10 @@ const styles = {
     margin: '1rem .2rem 0 .2rem',
     outline: 'none'
   },
-  h1: {
+  h2: {
     textAlign: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontFamily: 'Raleway'
   },
   noResults: {
     textAlign: 'center',
@@ -78,8 +79,6 @@ class SearchImages extends Component {
     event.preventDefault()
     findImages(query, user)
       .then((res) => {
-        console.log('then is running now')
-        console.log('res data is ', res.data.images)
         if (this._isMounted) {
           if ((res.data.images.results).length !== 0) {
             this.setState({ images: res.data.images.results, query: '', empty: false, random: false, randomImage: false, searched: true })
@@ -89,7 +88,6 @@ class SearchImages extends Component {
         }
       })
       .catch(() => {
-        console.log('error is running now')
         this.setState({ query: '' })
         enqueueSnackbar(messages.searchImagesFailure, { variant: 'error' })
       })
@@ -102,7 +100,6 @@ class SearchImages extends Component {
     findRandomImage(user)
       .then((res) => {
         if (res.data) {
-          console.log('random image res data', res.data)
           if (this._isMounted) {
             this.setState({ randomImage: res.data.image, query: '', empty: false, nonRandom: false, images: false, searched: true })
           } else {
@@ -125,7 +122,7 @@ class SearchImages extends Component {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <div className="image-search-header">
-                <h1 style={styles.h1}>What would you like to find today?</h1>
+                <h2 style={styles.h2}>What would you like to find today?</h2>
               </div>
             </Grid>
           </Grid>
@@ -172,7 +169,7 @@ class SearchImages extends Component {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <div className="image-search-header">
-                <h1 style={styles.h1}>What would you like to find today?</h1>
+                <h2 style={styles.h2}>What would you like to find today?</h2>
               </div>
             </Grid>
           </Grid>
@@ -223,7 +220,7 @@ class SearchImages extends Component {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <div className="image-search-header">
-                  <h1 style={styles.h1}>What would you like to find today?</h1>
+                  <h2 style={styles.h2}>What would you like to find today?</h2>
                 </div>
               </Grid>
             </Grid>
@@ -284,7 +281,7 @@ class SearchImages extends Component {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <div className="image-search-header">
-                  <h1 style={styles.h1}>What would you like to find today?</h1>
+                  <h2 style={styles.h2}>What would you like to find today?</h2>
                 </div>
               </Grid>
             </Grid>

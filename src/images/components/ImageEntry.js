@@ -37,8 +37,9 @@ const styles = {
     outline: 'none'
   },
   card: {
-    maxWidth: '70%',
-    margin: '2rem auto'
+    maxWidth: '100%',
+    margin: '2rem auto',
+    fontFamily: 'Raleway'
   },
   cardActions: {
     width: '100%',
@@ -53,7 +54,7 @@ const styles = {
     margin: '40vh auto'
   },
   media: {
-    height: 400
+    height: '60vh'
   },
   paper: {
     padding: '2rem',
@@ -125,49 +126,53 @@ class ImageEntry extends Component {
         <Fab color="primary" aria-label="add" style={styles.backButton} component={Link} to="/images" >
           <ArrowBackIos/>
         </Fab>
-        <Card style={styles.card}>
-          <CardMedia
-            style={styles.media}
-            image={imageUrl}
-            title={altDescription}
-          />
-          <CardContent>
-            <div className="image-content" >
-              <Typography variant="body2" color="textSecondary" component="p">
-               By <a href={userUrl} target="_blank" rel="noopener noreferrer">{userName}</a> on Unsplash
-              </Typography>
-              <Typography gutterBottom variant="h5" component="h2" style={styles.altDescription}>
-                {altDescription}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-              Your notes:
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {comments}
-              </Typography>
-            </div>
-          </CardContent>
-          <CardActions>
-            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
-              <div>
-                <Button href={imageUrl} size="small" color="primary" target="_blank" rel="noopener noreferrer">
-                Full Size
-                </Button>
-                <Button size="small" color="primary" href={fullUrl} target="_blank" rel="noopener noreferrer">
-                  High Resolution
-                </Button>
-              </div>
-              <span>
-                <Button component={Link} to={this.props.match.url + '/edit'} color="primary" size="small">
-                  Edit <Edit />
-                </Button>
-                <Button onClick={this.handleDelete} color="secondary" size="small">
-                Delete <DeleteForever color="secondary" />
-                </Button>
-              </span>
-            </div>
-          </CardActions>
-        </Card>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Card style={styles.card}>
+              <CardMedia
+                style={styles.media}
+                image={imageUrl}
+                title={altDescription}
+              />
+              <CardContent>
+                <div className="image-content" >
+                  <Typography variant="body2" color="textSecondary" component="p">
+                   By <a href={userUrl} target="_blank" rel="noopener noreferrer">{userName}</a> on Unsplash
+                  </Typography>
+                  <Typography gutterBottom variant="h5" component="h2" style={styles.altDescription}>
+                    {altDescription}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                  Your notes:
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {comments}
+                  </Typography>
+                </div>
+              </CardContent>
+              <CardActions>
+                <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+                  <div>
+                    <Button href={imageUrl} size="small" color="primary" target="_blank" rel="noopener noreferrer">
+                    Full Size
+                    </Button>
+                    <Button size="small" color="primary" href={fullUrl} target="_blank" rel="noopener noreferrer">
+                      High Resolution
+                    </Button>
+                  </div>
+                  <span>
+                    <Button component={Link} to={this.props.match.url + '/edit'} color="primary" size="small">
+                      Edit <Edit />
+                    </Button>
+                    <Button onClick={this.handleDelete} color="secondary" size="small">
+                    Delete <DeleteForever color="secondary" />
+                    </Button>
+                  </span>
+                </div>
+              </CardActions>
+            </Card>
+          </Grid>
+        </Grid>
       </Fragment>
     )
   }
