@@ -17,7 +17,9 @@ const styles = {
     justifyContent: 'center'
   },
   h2: {
-    fontFamily: 'Raleway'
+    fontFamily: 'Raleway',
+    margin: '1rem auto',
+    textAlign: 'center'
   },
   paper: {
     maxWidth: '800px',
@@ -38,7 +40,7 @@ const SearchedImageEntryForm = (
         <h2 style={styles.h2}>Add to Collection</h2>
         <form className="form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={6} sm={6}>
               <TextField
                 style={ styles.textfield }
                 variant="outlined"
