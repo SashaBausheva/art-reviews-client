@@ -16,6 +16,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
+import ClampLines from 'react-clamp-lines'
 
 import DeleteForever from '@material-ui/icons/DeleteForever'
 import Fab from '@material-ui/core/Fab'
@@ -40,7 +41,7 @@ const styles = {
   card: {
     height: '100%',
     display: 'grid',
-    gridTemplateRows: 'max-content 4fr 1fr'
+    gridTemplateRows: 'max-content 3fr 1fr'
     // margin: '1rem auto'
   },
   div: {
@@ -196,9 +197,9 @@ class ImageEntries extends Component {
         </div>
         <div>
           <div style={ styles.root }>
-            <Grid container spacing={3}>
+            <Grid container spacing={2}>
               {this.state.images.map(image => (
-                <Grid item xs={4} key={image._id}>
+                <Grid item xs={12} sm={12} md={4} lg={4} key={image._id}>
                   <Card style={styles.card}>
                     <CardMedia
                       style={styles.media}
@@ -210,13 +211,25 @@ class ImageEntries extends Component {
                         By <a href={`${image.userUrl}?utm_source=picture_it&utm_medium=referral`} target="_blank" rel="noopener noreferrer">{image.userName}</a> on Unsplash
                       </Typography>
                       <Typography gutterBottom variant="h5" component="h2" style={ styles.altDescription }>
-                        {image.altDescription}
+                        <ClampLines
+                          text={image.altDescription}
+                          id="imageId"
+                          lines={1}
+                          ellipsis="..."
+                          buttons={false}
+                        />
                       </Typography>
                       <Typography variant="body2" color="textSecondary" component="p">
                       Your notes:
                       </Typography>
                       <Typography variant="body2" color="textSecondary" component="p">
-                        {image.comments}
+                        <ClampLines
+                          text={image.comments}
+                          id="imageComments"
+                          lines={2}
+                          ellipsis="..."
+                          buttons={false}
+                        />
                       </Typography>
                     </CardContent>
                     <CardActions>

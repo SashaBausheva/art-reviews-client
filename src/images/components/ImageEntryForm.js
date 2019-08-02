@@ -30,7 +30,7 @@ const ImageEntryForm = (
   <div className="image-form-container">
     <CssBaseline />
     <div className="image-form">
-      <h1>Image Form Title Here</h1>
+      <h2>Add to Collection</h2>
 
       <form onSubmit={handleSubmit}>
         <Grid className="form-input" container spacing={2}>

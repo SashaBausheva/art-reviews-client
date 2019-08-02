@@ -7,5 +7,7 @@ export default {
   createImageEntryFailure: 'Failed to add image to collection. Try again?',
   editImageEntrySuccess: 'Looking good! Image updated successfully.',
   editImageEntryFailure: 'Failed to update image. Try again?',
-  searchImagesFailure: 'Something went wrong! Try again?'
+  searchImagesFailure: 'Something went wrong! Try again?',
+  homeFailure: 'Something went wrong!'
+
 }

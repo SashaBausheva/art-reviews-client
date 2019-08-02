@@ -20,8 +20,17 @@ import Lock from '@material-ui/icons/Lock'
 import ImageSearch from '@material-ui/icons/ImageSearch'
 import Collections from '@material-ui/icons/Collections'
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser'
+import { withRouter } from 'react-router'
 
 const styles = {
+  appBar: {
+    opacity: '.8'
+  },
+  appBarHome: {
+    opacity: '.7',
+    boxShadow: 'none',
+    backgroundColor: 'black'
+  },
   root: {
     flexGrow: 1
   },
@@ -31,10 +40,21 @@ const styles = {
     outline: 'none'
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    fontFamily: 'Raleway'
+  },
+  drawerTitle: {
+    flexGrow: 1,
+    fontFamily: 'Raleway',
+    textAlign: 'center',
+    alignSelf: 'center',
+    margin: '.2rem'
   },
   list: {
     width: 300
+  },
+  welcome: {
+    fontFamily: 'Raleway'
   }
 }
 
@@ -54,10 +74,12 @@ class Header extends Component {
   }
 
   render () {
+    const { location } = this.props
+
     const authenticatedSideOptions = (
       <div style={styles.list}>
         <div className="side-nav-title">
-          <Typography variant="h6" style={styles.title}>
+          <Typography variant="h6" style={styles.drawerTitle}>
             Picture It
           </Typography>
         </div>
@@ -115,7 +137,7 @@ class Header extends Component {
     const unauthenticatedSideOptions = (
       <div style={styles.list}>
         <div className="side-nav-title">
-          <Typography variant="h6" style={styles.title}>
+          <Typography variant="h6" style={styles.drawerTitle}>
             Picture It
           </Typography>
         </div>
@@ -145,7 +167,7 @@ class Header extends Component {
 
     return (
       <div style={styles.root}>
-        <AppBar position="absolute" style={{ opacity: '.8', boxShadow: 'none' }}>
+        <AppBar position="absolute" style={location.pathname === '/' ? styles.appBarHome : styles.appBar} >
           <Toolbar>
             <IconButton
               edge="start"
@@ -167,7 +189,9 @@ class Header extends Component {
             <Typography variant="h6" style={styles.title}>
               Picture It
             </Typography>
-            { this.props.user && <span>Welcome, {this.props.user.email}</span>}
+            <Typography variant="h6" style={styles.welcome}>
+              { this.props.user && <span>Welcome, {this.props.user.email}</span>}
+            </Typography>
             {/* user ? (
               <React.Fragment>
                 <Button style={styles.menuButton} component={Link} to="/change-password">Change Password</Button>
@@ -186,4 +210,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default withRouter(Header)
