@@ -188,7 +188,7 @@ class Home extends Component {
         {
           !this.props.user && <div><Box component="div" display={{ xs: 'none', sm: 'inline' }} style={{ color: 'white', left: 0, position: 'absolute', textAlign: 'center', top: '30vh', width: '100%', background: 'rgba(25, 25, 25, .6)', padding: '1.5rem 0' }}>
             <div style={{ width: '70%', margin: '0 auto' }}><h4>
-              Welcome to Picture It – your personal collection of high-resolution photos shared by creaters all around the world.
+              Welcome to Picture It – your personal collection of high-resolution photos shared by creators from all around the world.
             </h4>
             </div>
             <Box component="div" display={{ xs: 'none', md: 'inline' }}>
@@ -206,7 +206,7 @@ class Home extends Component {
           </Box>
           <Box component="div" display={{ xs: 'inline', sm: 'none' }} style={{ color: 'white', left: 0, position: 'absolute', textAlign: 'center', top: '22vh', width: '100%', background: 'rgba(25, 25, 25, .6)', padding: '.5rem 0' }}>
             <div style={{ width: '70%', margin: '0 auto' }}><h5>
-              Welcome to Picture It – your personal collection of high-resolution photos shared by creaters all around the world.
+              Welcome to Picture It – your personal collection of high-resolution photos shared by creators from all around the world.
             </h5>
             </div>
           </Box>
