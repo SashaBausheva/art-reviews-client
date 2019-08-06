@@ -15,7 +15,6 @@ import messages from './images/messages.js'
 import { withSnackbar } from 'notistack'
 import Box from '@material-ui/core/Box'
 import { CSSTransition } from 'react-transition-group'
-import Row from 'react-bootstrap/Row'
 
 const styles = {
   h3: {
@@ -134,100 +133,98 @@ class Home extends Component {
     }
 
     return (
-      <Row>
-        <div>
-          <CSSTransition
-            in={this.state.transitionCarouselIn}
-            timeout={{ enter: 250, exit: 1000 }}
-            classNames="carousel-transition"
-            appear
-            unmountOnExit
-          >
-            <Carousel interval={5000} style={{ height: '100vh', marginTop: '-100px' }}>
-              {this.state.images.map(image => (
-                <Carousel.Item key={`${this.props.user ? image._id : image.id}`}>
-                  { this.props.user ? (
-                    <div>
-                      <Box component="div" display={{ xs: 'inline', sm: 'none' }}>
-                        <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '60%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
-                          <Link to={`images/${image._id}`} style={{ color: 'white', textDecoration: 'none' }}>See this in your collection<ChevronRight /></Link>
-                        </h4>
-                      </Box>
-                      <Box component="div" display={{ xs: 'none', sm: 'inline' }}>
-                        <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '70%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
-                          <Link to={`images/${image._id}`} style={{ color: 'white', textDecoration: 'none' }}>See this in your collection<ChevronRight /></Link>
-                        </h4>
-                      </Box>
-                    </div>
-                  ) : (
-                    <div>
-                      <Box component="div" display={{ xs: 'inline', sm: 'none' }}>
-                        <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '60%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
-                          <Link to={'/sign-in'} style={{ color: 'white', textDecoration: 'underline' }}>Sign in to start collecting<ChevronRight /></Link>
-                        </h4>
-                      </Box>
-                      <Box component="div" display={{ xs: 'none', sm: 'inline' }}>
-                        <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '70%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
-                          <Link to={'/sign-in'} style={{ color: 'white', textDecoration: 'underline' }}>Sign in to start collecting<ChevronRight /></Link>
-                        </h4>
-                      </Box>
-                    </div>
-                  )}
-                  <img style={styles.images}
-                    className="d-block w-100"
-                    src={this.props.user && image.fullUrl ? image.fullUrl : image.urls.full}
-                    alt={this.props.user ? image.altDescription : image.alt_description}
-                  />
-                  <Carousel.Caption>
-                    <Box component="div" textOverflow="ellipsis">
-                      <h3 style={ styles.imageTitle }>
-                        { (image.altDescription || image.alt_description)
-                          ? <ClampLines
-                            text={ this.props.user ? image.altDescription : image.alt_description }
-                            id={'image-' + `${this.props.user ? image._id : image.id}`}
-                            lines={0}
-                            ellipsis="..."
-                            buttons={false}
-                          />
-                          : 'Untitled Image'
-                        }
-                      </h3>
+      <div>
+        <CSSTransition
+          in={this.state.transitionCarouselIn}
+          timeout={{ enter: 250, exit: 1000 }}
+          classNames="carousel-transition"
+          appear
+          unmountOnExit
+        >
+          <Carousel interval={5000} style={{ height: '100vh', marginTop: '-100px' }}>
+            {this.state.images.map(image => (
+              <Carousel.Item key={`${this.props.user ? image._id : image.id}`}>
+                { this.props.user ? (
+                  <div>
+                    <Box component="div" display={{ xs: 'inline', sm: 'none' }}>
+                      <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '60%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
+                        <Link to={`images/${image._id}`} style={{ color: 'white', textDecoration: 'none' }}>See this in your collection<ChevronRight /></Link>
+                      </h4>
                     </Box>
-                      By <a href={`${this.props.user ? image.userUrl : image.user.links.self}?utm_source=picture_it&utm_medium=referral`} style={{ color: 'white', textDecoration: 'underline' }} target="_blank" rel="noopener noreferrer">{this.props.user ? image.userName : image.user.name}</a> on Unsplash
-                  </Carousel.Caption>
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </CSSTransition>
-          {
-            !this.props.user && <div><Box component="div" display={{ xs: 'none', sm: 'inline' }} style={{ color: 'white', left: 0, position: 'absolute', textAlign: 'center', top: '30vh', width: '100%', background: 'rgba(25, 25, 25, .6)', padding: '1.5rem 0' }}>
-              <div style={{ width: '70%', margin: '0 auto' }}><h4>
-                Welcome to Picture It – your personal collection of high-resolution photos shared by creators from all around the world.
-              </h4>
-              </div>
-              <Box component="div" display={{ xs: 'none', md: 'inline' }}>
-                <h5 style={{ marginTop: '1rem', marginBottom: '.5rem' }}>{'Sign in to take advantage of the app\'s features:'}
-                  <br />
-                </h5>
-                <div style={{ width: '90vh', margin: '.2rem auto' }}>
-                  <ul style={{ textAlign: 'left', margin: '.2rem auto' }}>
-                    <li>Search for thousands of high-resolution images.</li>
-                    <li>Collect images and store them in your account with just one click!</li>
-                    <li>Add comments to your collected images, or remove images from your collection entirely.</li>
-                  </ul>
-                </div>
-              </Box>
-            </Box>
-            <Box component="div" display={{ xs: 'inline', sm: 'none' }} style={{ color: 'white', left: 0, position: 'absolute', textAlign: 'center', top: '22vh', width: '100%', background: 'rgba(25, 25, 25, .6)', padding: '.5rem 0' }}>
-              <div style={{ width: '70%', margin: '0 auto' }}><h5>
-                Welcome to Picture It – your personal collection of high-resolution photos shared by creators from all around the world.
-              </h5>
-              </div>
-            </Box>
+                    <Box component="div" display={{ xs: 'none', sm: 'inline' }}>
+                      <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '70%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
+                        <Link to={`images/${image._id}`} style={{ color: 'white', textDecoration: 'none' }}>See this in your collection<ChevronRight /></Link>
+                      </h4>
+                    </Box>
+                  </div>
+                ) : (
+                  <div>
+                    <Box component="div" display={{ xs: 'inline', sm: 'none' }}>
+                      <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '60%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
+                        <Link to={'/sign-in'} style={{ color: 'white', textDecoration: 'underline' }}>Sign in to start collecting<ChevronRight /></Link>
+                      </h4>
+                    </Box>
+                    <Box component="div" display={{ xs: 'none', sm: 'inline' }}>
+                      <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '70%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
+                        <Link to={'/sign-in'} style={{ color: 'white', textDecoration: 'underline' }}>Sign in to start collecting<ChevronRight /></Link>
+                      </h4>
+                    </Box>
+                  </div>
+                )}
+                <img style={styles.images}
+                  className="d-block w-100"
+                  src={this.props.user && image.fullUrl ? image.fullUrl : image.urls.full}
+                  alt={this.props.user ? image.altDescription : image.alt_description}
+                />
+                <Carousel.Caption>
+                  <Box component="div" textOverflow="ellipsis">
+                    <h3 style={ styles.imageTitle }>
+                      { (image.altDescription || image.alt_description)
+                        ? <ClampLines
+                          text={ this.props.user ? image.altDescription : image.alt_description }
+                          id={'image-' + `${this.props.user ? image._id : image.id}`}
+                          lines={0}
+                          ellipsis="..."
+                          buttons={false}
+                        />
+                        : 'Untitled Image'
+                      }
+                    </h3>
+                  </Box>
+                    By <a href={`${this.props.user ? image.userUrl : image.user.links.self}?utm_source=picture_it&utm_medium=referral`} style={{ color: 'white', textDecoration: 'underline' }} target="_blank" rel="noopener noreferrer">{this.props.user ? image.userName : image.user.name}</a> on Unsplash
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </CSSTransition>
+        {
+          !this.props.user && <div><Box component="div" display={{ xs: 'none', sm: 'inline' }} style={{ color: 'white', left: 0, position: 'absolute', textAlign: 'center', top: '30vh', width: '100%', background: 'rgba(25, 25, 25, .6)', padding: '1.5rem 0' }}>
+            <div style={{ width: '70%', margin: '0 auto' }}><h4>
+              Welcome to Picture It – your personal collection of high-resolution photos shared by creators from all around the world.
+            </h4>
             </div>
-          }
-        </div>
-      </Row>
+            <Box component="div" display={{ xs: 'none', md: 'inline' }}>
+              <h5 style={{ marginTop: '1rem', marginBottom: '.5rem' }}>{'Sign in to take advantage of the app\'s features:'}
+                <br />
+              </h5>
+              <div style={{ width: '90vh', margin: '.2rem auto' }}>
+                <ul style={{ textAlign: 'left', margin: '.2rem auto' }}>
+                  <li>Search for thousands of high-resolution images.</li>
+                  <li>Collect images and store them in your account with just one click!</li>
+                  <li>Add comments to your collected images, or remove images from your collection entirely.</li>
+                </ul>
+              </div>
+            </Box>
+          </Box>
+          <Box component="div" display={{ xs: 'inline', sm: 'none' }} style={{ color: 'white', left: 0, position: 'absolute', textAlign: 'center', top: '22vh', width: '100%', background: 'rgba(25, 25, 25, .6)', padding: '.5rem 0' }}>
+            <div style={{ width: '70%', margin: '0 auto' }}><h5>
+              Welcome to Picture It – your personal collection of high-resolution photos shared by creators from all around the world.
+            </h5>
+            </div>
+          </Box>
+          </div>
+        }
+      </div>
     )
   }
 }
