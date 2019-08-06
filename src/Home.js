@@ -146,12 +146,12 @@ class Home extends Component {
               <Carousel.Item key={`${this.props.user ? image._id : image.id}`}>
                 { this.props.user ? (
                   <div>
-                    <Box component="div" display={{ xs: 'inline', sm: 'none' }}>
+                    <Box component="div" className="carouselText" display={{ xs: 'inline', sm: 'none' }}>
                       <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '60%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
                         <Link to={`images/${image._id}`} style={{ color: 'white', textDecoration: 'none' }}>See this in your collection<ChevronRight /></Link>
                       </h4>
                     </Box>
-                    <Box component="div" display={{ xs: 'none', sm: 'inline' }}>
+                    <Box component="div" className="carouselText" display={{ xs: 'none', sm: 'inline' }}>
                       <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '70%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
                         <Link to={`images/${image._id}`} style={{ color: 'white', textDecoration: 'none' }}>See this in your collection<ChevronRight /></Link>
                       </h4>
@@ -159,12 +159,12 @@ class Home extends Component {
                   </div>
                 ) : (
                   <div>
-                    <Box component="div" display={{ xs: 'inline', sm: 'none' }}>
+                    <Box component="div" className="carouselText" display={{ xs: 'inline', sm: 'none' }}>
                       <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '60%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
                         <Link to={'/sign-in'} style={{ color: 'white', textDecoration: 'underline' }}>Sign in to start collecting<ChevronRight /></Link>
                       </h4>
                     </Box>
-                    <Box component="div" display={{ xs: 'none', sm: 'inline' }}>
+                    <Box component="div" className="carouselText" display={{ xs: 'none', sm: 'inline' }}>
                       <h4 style={{ left: 0, position: 'absolute', textAlign: 'center', top: '70%', width: '100%', background: 'rgba(0, 0, 0, .6)', padding: '1.5rem 0' }}>
                         <Link to={'/sign-in'} style={{ color: 'white', textDecoration: 'underline' }}>Sign in to start collecting<ChevronRight /></Link>
                       </h4>
