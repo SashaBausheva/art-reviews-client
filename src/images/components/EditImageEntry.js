@@ -99,7 +99,6 @@ class EditImageEntry extends Component {
                   altDescription={altDescription}
                   userName={userName}
                   comments={comments}
-                  // gallery={this.state.review.artistUsername.gallery}
                   handleChange={this.handleChange}
                   handleSubmit={this.handleSubmit}
                 />

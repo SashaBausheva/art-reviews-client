@@ -12,7 +12,7 @@ class SignOut extends Component {
     signOut(user)
       .finally(() => {
         clearUser() // clear the user first!
-        enqueueSnackbar(messages.signInSuccess, { variant: 'success' })
+        enqueueSnackbar(messages.signOutSuccess, { variant: 'success' })
         history.push('/')
       })
   }

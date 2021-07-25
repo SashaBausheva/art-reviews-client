@@ -123,7 +123,7 @@ class ImageEntry extends Component {
 
     return (
       <Fragment>
-        <Fab color="primary" aria-label="add" style={styles.backButton} component={Link} to="/images" >
+        <Fab color="primary" aria-label="back" className="button-back" style={styles.backButton} component={Link} to="/images" >
           <ArrowBackIos/>
         </Fab>
         <Grid container spacing={2}>

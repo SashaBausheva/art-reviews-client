@@ -8,7 +8,6 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Grid from '@material-ui/core/Grid'
-import ClampLines from 'react-clamp-lines'
 import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
 import messages from './images/messages.js'
@@ -180,13 +179,7 @@ class Home extends Component {
                   <Box component="div" textOverflow="ellipsis">
                     <h3 style={ styles.imageTitle }>
                       { (image.altDescription || image.alt_description)
-                        ? <ClampLines
-                          text={ this.props.user ? image.altDescription : image.alt_description }
-                          id={'image-' + `${this.props.user ? image._id : image.id}`}
-                          lines={0}
-                          ellipsis="..."
-                          buttons={false}
-                        />
+                        ? (image.altDescription || image.alt_description)
                         : 'Untitled Image'
                       }
                     </h3>
@@ -209,7 +202,7 @@ class Home extends Component {
               </h5>
               <div style={{ width: '90vh', margin: '.2rem auto' }}>
                 <ul style={{ textAlign: 'left', margin: '.2rem auto' }}>
-                  <li>Search for thousands of high-resolution images.</li>
+                  <li>Search thousands of high-resolution images.</li>
                   <li>Collect images and store them in your account with just one click!</li>
                   <li>Add comments to your collected images, or remove images from your collection entirely.</li>
                 </ul>

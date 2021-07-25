@@ -6,7 +6,7 @@
 - Link to the deployed API: https://morning-reaches-38888.herokuapp.com
 
 ## Application Description
-Picture It is a single-page application which allows users to search for images and add them to their collection along with comments/notes. Once signed up and authenticated, users can view their collection of images and create new image entries from search results. Users can search images using queries or choose to get a random image from the database. All images come from a third-party API belonging to [Unsplash](https://unsplash.com).The backend was built using Express.js and MongoDB. The front-end was built using React.js and Axios for http requests (the requests communicate with the back end and third-party API).
+Picture It is a single-page application which allows users to search images and add them to their collection along with comments/notes. Once signed up and authenticated, users can view their collection of images and create new image entries from search results. Users can search images using queries or choose to get a random image from the database. All images come from a third-party API belonging to [Unsplash](https://unsplash.com).The backend was built using Express.js and MongoDB. The front-end was built using React.js and Axios for http requests (the requests communicate with the back end and third-party API).
 
 ## Technologies Used
 - React

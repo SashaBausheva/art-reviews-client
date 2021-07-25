@@ -103,11 +103,6 @@ const ImageEntryForm = (
               <Button component={Link} to="/images" variant="contained" color="secondary" style={ styles.editBtn }>Cancel</Button>
             </div>
           </Grid>
-          {/* // <Grid item xs={10} sm={5}>
-          //   <div className="create-btn-submit">
-          //     <Button component={Link} to="/search-artist" variant="contained" color="primary" fullWidth>Search for artist</Button>
-          //   </div>
-          // </Grid> */}
         </Grid>
       </form>
     </div>

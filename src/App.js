@@ -18,15 +18,6 @@ import Home from './Home.js'
 
 import { SnackbarProvider } from 'notistack'
 
-const sectionStyle = {
-  // width: '100%',
-  // height: '100%',
-  // backgroundImage: 'url(' + Background + ')',
-  // backgroundSize: 'cover',
-  // backgroundPosition: 'center',
-  // backgroundAttachment: 'fixed'
-}
-
 class App extends Component {
   constructor () {
     super()
@@ -45,7 +36,7 @@ class App extends Component {
     const { user } = this.state
 
     return (
-      <section style={ sectionStyle }>
+      <section>
         <SnackbarProvider maxSnack={3} autoHideDuration={2000}>
           <Header user={user} />
           <Route exact path='/' render={() => (

@@ -42,7 +42,6 @@ const styles = {
     height: '100%',
     display: 'grid',
     gridTemplateRows: 'max-content 3fr 1fr'
-    // margin: '1rem auto'
   },
   div: {
     alignItems: 'center',
@@ -63,7 +62,6 @@ const styles = {
   paper: {
     padding: '2rem',
     height: '100%'
-    // margin: '1rem auto'
   },
   root: {
     flexGrow: 1
