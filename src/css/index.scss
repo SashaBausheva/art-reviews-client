@@ -15,6 +15,20 @@ body {
   padding-top: 100px;
 }
 
+.auth-form {
+  label {
+    display: none;
+  }
+}
+
+.sample-credentials {
+  font-size: .9rem;
+
+  p {
+    margin: 5px 0;
+  }
+}
+
 .button-back {
   svg {
     margin-left: 6px;

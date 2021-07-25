@@ -53,7 +53,7 @@ class SignIn extends Component {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper style={ styles.paper }>
-              <form onSubmit={this.onSignIn}>
+              <form onSubmit={this.onSignIn} className="auth-form">
                 <h3>Sign In</h3>
 
                 <TextField
@@ -78,6 +78,13 @@ class SignIn extends Component {
                   style={{ width: '100%', marginBotton: '1rem' }}
                   onChange={this.handleChange}
                 />
+                <div className="sample-credentials">
+                  <p>You can sign in using these sample credentials:</p>
+                  <p><b>Email:</b> sample@sample</p>
+                  <p><b>Password:</b> sample</p>
+                  <p>Please avoid using your real passwords!</p>
+                  <p>Note: It might take the API a couple seconds to wake up.</p>
+                </div>
                 <Button type='submit' variant="contained" color="primary" style={{ outline: 'none' }}>
                         Sign In
                 </Button>

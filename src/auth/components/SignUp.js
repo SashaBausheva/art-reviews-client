@@ -94,6 +94,13 @@ class SignUp extends Component {
                   style={{ width: '100%', marginBotton: '1rem' }}
                   onChange={this.handleChange}
                 />
+                <div className="sample-credentials">
+                  <p>You can also use these sample credentials:</p>
+                  <p><b>Email:</b> sample@sample</p>
+                  <p><b>Password:</b> sample</p>
+                  <p>Please avoid using your real passwords!</p>
+                  <p>Note: It might take the API a couple seconds to wake up.</p>
+                </div>
                 <Button variant="contained" color="primary" type="submit" style={{ outline: 'none' }}>Sign Up</Button>
               </form>
             </Paper>
